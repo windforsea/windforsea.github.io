@@ -231,28 +231,28 @@ function initPhotoModal() {
 
 function getOrCreatePhotoModal() {
   let modal = document.getElementById('photoModal');
-  if (modal) return modal;
-
-  modal = document.createElement('div');
-  modal.className = 'photo-modal';
-  modal.id = 'photoModal';
-  modal.setAttribute('role', 'dialog');
-  modal.setAttribute('aria-modal', 'true');
-  modal.setAttribute('aria-hidden', 'true');
-  modal.innerHTML = `
-    <div class="photo-modal-backdrop"></div>
-    <div class="photo-modal-content">
-      <button type="button" class="modal-close-btn" aria-label="닫기">✕</button>
-      <div class="modal-img-container">
-        <img src="" alt="" class="modal-img" id="modalImg" />
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.className = 'photo-modal';
+    modal.id = 'photoModal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-hidden', 'true');
+    modal.innerHTML = `
+      <div class="photo-modal-backdrop"></div>
+      <div class="photo-modal-content">
+        <button type="button" class="modal-close-btn" aria-label="닫기">✕</button>
+        <div class="modal-img-container">
+          <img src="" alt="" class="modal-img" id="modalImg" />
+        </div>
+        <div class="modal-caption">
+          <h4 id="modalTitle"></h4>
+          <p id="modalDesc"></p>
+        </div>
       </div>
-      <div class="modal-caption">
-        <h4 id="modalTitle"></h4>
-        <p id="modalDesc"></p>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(modal);
+    `;
+    document.body.appendChild(modal);
+  }
 
   function closeModal() {
     modal.classList.remove('active');
