@@ -45,9 +45,10 @@ function initSmoothTransitions() {
     const href = link.getAttribute('href');
     if (!href) return;
 
-    // 외부 링크, 새 창, 앵커, mailto 등은 기본 동작 유지
+    // 외부 링크, 새 창, 앵커, mailto, 책자 버전 등은 기본 브라우저 내비게이션 유지
     if (
       link.target === '_blank' ||
+      href.includes('book.html') ||
       href.startsWith('http://') ||
       href.startsWith('https://') ||
       href.startsWith('mailto:') ||

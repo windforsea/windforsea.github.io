@@ -20,15 +20,19 @@
                     inset 0 0 6px rgba(255, 255, 255, 0.25),
                     0 4px 12px rgba(0, 0, 0, 0.12);
 
-  --tab-glass-bg: rgba(15, 23, 42, 0.42);
-  --card-glass-bg: rgba(15, 23, 42, 0.55);
-  --card-glass-border: rgba(255, 255, 255, 0.24);
-  --card-glass-shadow: inset 0 1.5px 1px rgba(255, 255, 255, 0.35), 0 24px 48px -12px rgba(0, 0, 0, 0.4);
+  --tab-glass-bg: rgba(10, 22, 50, 0.46);
+  --card-glass-bg: rgba(8, 19, 44, 0.58);
+  --card-glass-border: rgba(186, 230, 254, 0.24);
+  --card-glass-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.4), 
+                       inset 0 -1.5px 2px rgba(0, 0, 0, 0.25), 
+                       0 24px 50px -12px rgba(2, 6, 23, 0.6), 
+                       0 0 40px rgba(14, 165, 233, 0.09);
   
   --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.92);
-  --text-muted: rgba(255, 255, 255, 0.72);
+  --text-secondary: rgba(255, 255, 255, 0.94);
+  --text-muted: rgba(224, 242, 254, 0.74);
   --accent-blue: #38bdf8;
+  --sapphire-glow: #0284c7;
   
   --radius-pill: 9999px;
   --radius-card: 26px;
@@ -81,7 +85,7 @@ body.page-dimmed {
 }
 
 /* ==========================================================================
-   Fullpage Background Image (호버 시 불투명/블러 효과 제거 -> 상시 선명 유지)
+   Blue Sapphire & Sky Blue Liquid Glass Ambient Canvas
    ========================================================================== */
 .background-container {
   position: fixed;
@@ -91,19 +95,56 @@ body.page-dimmed {
   height: 100vh;
   z-index: 1;
   overflow: hidden;
+  background-color: #060d1f;
+  background-image: 
+    radial-gradient(circle at 18% 22%, rgba(14, 165, 233, 0.25) 0%, transparent 45%),
+    radial-gradient(circle at 82% 78%, rgba(29, 78, 216, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 50% 45%, rgba(2, 132, 199, 0.16) 0%, transparent 60%),
+    radial-gradient(circle at 80% 15%, rgba(56, 189, 248, 0.2) 0%, transparent 40%),
+    linear-gradient(145deg, #060d1e 0%, #0a1733 45%, #071025 100%);
 }
 
-.background-image {
+/* 앰비언트 사파이어 라이트 오브 (Liquid Light Refraction) */
+.sapphire-orb {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  filter: brightness(0.96) contrast(1.02);
-  transform: scale(1.0);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 50%;
+  filter: blur(85px);
+  pointer-events: none;
+  opacity: 0.7;
+  animation: sapphireFloat 18s ease-in-out infinite alternate;
+}
+
+.sapphire-orb-1 {
+  width: 500px;
+  height: 500px;
+  top: -60px;
+  left: 8%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.38) 0%, rgba(2, 132, 199, 0.08) 65%, transparent 100%);
+}
+
+.sapphire-orb-2 {
+  width: 620px;
+  height: 620px;
+  bottom: -90px;
+  right: 5%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.42) 0%, rgba(30, 58, 138, 0.1) 70%, transparent 100%);
+  animation-duration: 24s;
+  animation-direction: alternate-reverse;
+}
+
+.sapphire-orb-3 {
+  width: 420px;
+  height: 420px;
+  top: 36%;
+  left: 45%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, transparent 75%);
+  animation-duration: 16s;
+}
+
+@keyframes sapphireFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(32px, -24px) scale(1.06); }
+  100% { transform: translate(-24px, 22px) scale(0.95); }
 }
 
 .background-overlay {
@@ -111,8 +152,8 @@ body.page-dimmed {
   inset: 0;
   background: radial-gradient(
     circle at 50% 30%,
-    rgba(0, 0, 0, 0.02) 0%,
-    rgba(0, 0, 0, 0.25) 100%
+    rgba(255, 255, 255, 0.015) 0%,
+    rgba(6, 12, 26, 0.28) 100%
   );
   pointer-events: none;
 }
@@ -120,8 +161,8 @@ body.page-dimmed {
 body.subpage .background-overlay {
   background: radial-gradient(
     circle at 50% 30%,
-    rgba(0, 0, 0, 0.18) 0%,
-    rgba(0, 0, 0, 0.48) 100%
+    rgba(7, 14, 31, 0.15) 0%,
+    rgba(4, 9, 20, 0.5) 100%
   );
 }
 
@@ -320,17 +361,23 @@ body.subpage .tab-container:hover .tab-link {
 }
 
 /* ==========================================================================
-   Bottom Watermark (위치 정보 + @windforsea 미니멀 텍스트)
+   Bottom Watermark (@windforsea 미니멀 사파이어 글래스 캡슐)
    ========================================================================== */
 .watermark {
   position: fixed;
   bottom: 24px;
   right: 32px;
   z-index: 90;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  background: rgba(10, 22, 50, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(186, 230, 254, 0.22);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.3);
   pointer-events: auto;
   user-select: none;
   transition: var(--transition-smooth);
@@ -338,24 +385,24 @@ body.subpage .tab-container:hover .tab-link {
 
 .watermark:hover {
   transform: translateY(-2px);
+  background: rgba(12, 28, 64, 0.65);
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 12px 28px rgba(2, 132, 199, 0.22), inset 0 1.5px 1.5px rgba(255, 255, 255, 0.45);
 }
 
 .watermark-location {
   font-family: var(--font-body);
-  font-size: 0.88rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #ffffff;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85), 0 2px 10px rgba(0, 0, 0, 0.7);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--accent-blue);
 }
 
 .watermark-credit {
   font-family: var(--font-mono);
   font-size: 0.82rem;
-  letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85), 0 2px 8px rgba(0, 0, 0, 0.7);
-  transition: color 0.2s ease;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  font-weight: 500;
 }
 
 .watermark:hover .watermark-credit {
