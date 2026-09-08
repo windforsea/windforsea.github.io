@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    Booklet Journal Edition - windforsea
    우에서 좌로 넘기는 책자 인터랙션 + 상단 3개 책갈피 리본
    ========================================================================== */
@@ -146,21 +146,33 @@ html, body {
   padding: 90px 24px 70px;
 }
 
-/* 상단 3개 책갈피 리본 탭 */
+/* ==========================================================================
+   상단 3개 책갈피 리본 탭 (부채꼴 Fan 형태 인터랙션)
+   ========================================================================== */
 .bookmarks-nav {
   position: relative;
   width: 100%;
   max-width: 820px;
   display: flex;
   justify-content: flex-end;
-  gap: 16px;
-  padding-right: 48px;
-  margin-bottom: -6px; /* 책자와 딱 맞물려 꽂힌 듯한 느낌 */
+  padding-right: 52px;
+  margin-bottom: -10px; /* 책자 상단 틈새로 자연스럽게 꽂힌 느낌 */
   z-index: 40;
 }
 
-.bookmark-ribbon {
+.bookmarks-fan {
   position: relative;
+  width: 250px;
+  height: 62px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.bookmark-ribbon {
+  position: absolute;
+  bottom: 0;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -169,7 +181,9 @@ html, body {
   cursor: pointer;
   outline: none;
   padding: 0;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease;
+  transform-origin: 50% 120%;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease;
+  will-change: transform;
 }
 
 .bookmark-ribbon .ribbon-text {
@@ -182,12 +196,13 @@ html, body {
   padding: 10px 18px 8px;
   border-radius: 8px 8px 0 0;
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.35);
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  border-right: 1px solid rgba(255, 255, 255, 0.25);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   position: relative;
   z-index: 2;
+  white-space: nowrap;
 }
 
 /* 리본 하단 V자 컷팅 장식 */
@@ -211,20 +226,82 @@ html, body {
   background: var(--ribbon-space-bg);
 }
 
-/* 책갈피 호버 시 위로 쏙 당겨짐 */
-.bookmark-ribbon:hover {
-  transform: translateY(-8px);
-  filter: brightness(1.12);
+/* --- [1] 기본 상태: 부채처럼 한곳에 포개져 모여있는 상태 --- */
+.bookmark-ribbon.ribbon-about {
+  left: 50%;
+  transform: translateX(-68%) rotate(-12deg);
+  z-index: 1;
+}
+.bookmark-ribbon.ribbon-projects {
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  z-index: 2;
+}
+.bookmark-ribbon.ribbon-space {
+  left: 50%;
+  transform: translateX(-32%) rotate(12deg);
+  z-index: 3;
 }
 
-/* 현재 활성화된 챕터의 책갈피 */
+/* 기본 상태에서 현재 활성 챕터는 살짝 솟아올라 표시 */
 .bookmark-ribbon.active {
-  transform: translateY(-12px);
-  filter: drop-shadow(0 4px 12px rgba(56, 189, 248, 0.45));
+  filter: drop-shadow(0 4px 14px rgba(255, 255, 255, 0.35));
+}
+.bookmark-ribbon.ribbon-about.active {
+  transform: translateX(-68%) rotate(-12deg) translateY(-8px);
+  z-index: 5;
+}
+.bookmark-ribbon.ribbon-projects.active {
+  transform: translateX(-50%) rotate(0deg) translateY(-8px);
+  z-index: 5;
+}
+.bookmark-ribbon.ribbon-space.active {
+  transform: translateX(-32%) rotate(12deg) translateY(-8px);
+  z-index: 5;
 }
 .bookmark-ribbon.active .ribbon-text {
   font-weight: 700;
-  border-color: rgba(255, 255, 255, 0.7);
+  border-top-color: rgba(255, 255, 255, 0.9);
+}
+
+/* --- [2] 마우스 호버 상태: 부채가 촤르륵 좌/중/우로 넓게 펼쳐짐 --- */
+.bookmarks-fan:hover .bookmark-ribbon.ribbon-about {
+  transform: translateX(-120%) rotate(-20deg) translateY(-6px);
+  z-index: 4;
+}
+.bookmarks-fan:hover .bookmark-ribbon.ribbon-projects {
+  transform: translateX(-50%) rotate(0deg) translateY(-14px);
+  z-index: 4;
+}
+.bookmarks-fan:hover .bookmark-ribbon.ribbon-space {
+  transform: translateX(20%) rotate(20deg) translateY(-6px);
+  z-index: 4;
+}
+
+/* 호버 시 활성화된 리본 위치 보정 */
+.bookmarks-fan:hover .bookmark-ribbon.ribbon-about.active {
+  transform: translateX(-120%) rotate(-20deg) translateY(-14px);
+}
+.bookmarks-fan:hover .bookmark-ribbon.ribbon-projects.active {
+  transform: translateX(-50%) rotate(0deg) translateY(-20px);
+}
+.bookmarks-fan:hover .bookmark-ribbon.ribbon-space.active {
+  transform: translateX(20%) rotate(20deg) translateY(-14px);
+}
+
+/* --- [3] 개별 리본에 마우스가 닿았을 때 (더욱 위로 솟아오름) --- */
+.bookmarks-fan .bookmark-ribbon:hover {
+  filter: brightness(1.18) drop-shadow(0 8px 24px rgba(0, 0, 0, 0.6));
+  z-index: 10 !important;
+}
+.bookmarks-fan:hover .bookmark-ribbon.ribbon-about:hover {
+  transform: translateX(-120%) rotate(-20deg) translateY(-22px) scale(1.06);
+}
+.bookmarks-fan:hover .bookmark-ribbon.ribbon-projects:hover {
+  transform: translateX(-50%) rotate(0deg) translateY(-26px) scale(1.06);
+}
+.bookmarks-fan:hover .bookmark-ribbon.ribbon-space:hover {
+  transform: translateX(20%) rotate(20deg) translateY(-22px) scale(1.06);
 }
 
 /* ==========================================================================
@@ -293,6 +370,54 @@ html, body {
   flex-direction: column;
 }
 
+/* 책장 내부 감성 배경 이미지 레이어 */
+.book-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.18;
+  filter: saturate(1.15) contrast(1.1) brightness(0.68);
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+}
+
+/* 책장 내부 다크 비네트 & 제본부 음영 오버레이 */
+.book-page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.05) 12%, transparent 50%, rgba(0, 0, 0, 0.3) 100%),
+    radial-gradient(ellipse at 50% 40%, rgba(15, 23, 42, 0.25) 0%, rgba(10, 15, 29, 0.75) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 개별 페이지 맞춤 배경 이미지 */
+.page-cover::before {
+  background-image: url('assets/sledo.jpg');
+  opacity: 0.32;
+  filter: saturate(1.2) contrast(1.15) brightness(0.65);
+}
+
+.page-about::before {
+  background-image: url('assets/sunam1.jpg');
+  opacity: 0.24;
+}
+
+.page-projects::before {
+  background-image: url('assets/sunam2.jpg');
+  opacity: 0.22;
+}
+
+.page-space::before {
+  background-image: url('assets/sledo2.jpg');
+  opacity: 0.25;
+}
+
 /* 현재 보이는 활성 페이지 */
 .book-page.active {
   opacity: 1;
@@ -313,6 +438,7 @@ html, body {
 
 .page-inner {
   position: relative;
+  z-index: 2;
   width: 100%;
   height: 100%;
   padding: 44px 52px 36px 70px;
@@ -366,7 +492,9 @@ html, body {
    Page 0: Cover Styling
    ========================================================================== */
 .cover-inner {
-  background: var(--book-cover-bg);
+  background: rgba(13, 21, 39, 0.48);
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -996,13 +1124,18 @@ html, body {
   }
 
   .bookmarks-nav {
-    gap: 8px;
     padding-right: 16px;
+    margin-bottom: -6px;
+  }
+
+  .bookmarks-fan {
+    width: 200px;
+    height: 54px;
   }
 
   .bookmark-ribbon .ribbon-text {
-    font-size: 0.78rem;
-    padding: 8px 12px 6px;
+    font-size: 0.76rem;
+    padding: 7px 12px 5px;
   }
 
   .book-spine-container {
