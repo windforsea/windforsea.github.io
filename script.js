@@ -142,11 +142,13 @@ async function navigateSmoothSpa(url, relativeHref, pushHistory = true) {
       // 3. 탭 & 홈 버튼 활성화 상태 부드러운 갱신
       updateNavActiveState(relativeHref);
 
-      // 4. 워터마크 부드러운 갱신
-      const currentWatermarkLoc = document.querySelector('.watermark-location');
-      const newWatermarkLoc = newDoc.querySelector('.watermark-location');
-      if (currentWatermarkLoc && newWatermarkLoc) {
-        currentWatermarkLoc.textContent = newWatermarkLoc.textContent;
+      // 4. 워터마크 부드러운 갱신 (위치명 + designed by 크레딧 전체 동기화)
+      const currentWatermark = document.querySelector('.watermark');
+      const newWatermark = newDoc.querySelector('.watermark');
+      if (currentWatermark && newWatermark) {
+        currentWatermark.innerHTML = newWatermark.innerHTML;
+      } else if (!currentWatermark && newWatermark) {
+        document.body.appendChild(newWatermark.cloneNode(true));
       }
 
       // 5. 갤러리 모달 이벤트 바인딩

@@ -285,42 +285,57 @@ body.subpage .tab-container:hover .tab-link {
 }
 
 /* ==========================================================================
-   Bottom Watermark (위치 정보 + designed by @windforsea)
+   Bottom Watermark (위치 정보 + designed by @windforsea 글래스 캡슐)
    ========================================================================== */
 .watermark {
   position: fixed;
   bottom: 24px;
   right: 32px;
-  z-index: 50;
+  z-index: 90;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 3px;
+  padding: 8px 16px;
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.35);
   pointer-events: auto;
   user-select: none;
-  transition: opacity 0.25s ease;
+  transition: var(--transition-smooth);
+}
+
+.watermark:hover {
+  background: rgba(15, 23, 42, 0.8);
+  border-color: rgba(255, 255, 255, 0.38);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45), inset 0 1.5px 1px rgba(255, 255, 255, 0.45);
 }
 
 .watermark-location {
   font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 500;
+  font-size: 0.84rem;
+  font-weight: 600;
   letter-spacing: -0.01em;
-  color: rgba(255, 255, 255, 0.95);
-  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .watermark-credit {
   font-family: var(--font-mono);
-  font-size: 0.74rem;
-  letter-spacing: 0.09em;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.78);
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
+  color: rgba(255, 255, 255, 0.75);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: color 0.2s ease;
 }
 
 .watermark:hover .watermark-credit {
-  color: var(--text-primary);
+  color: var(--accent-blue);
 }
 
 /* ==========================================================================
@@ -908,6 +923,14 @@ body.subpage .tab-container:hover .tab-link {
   .watermark {
     bottom: 16px;
     right: 16px;
-    font-size: 0.7rem;
+    padding: 6px 12px;
+  }
+
+  .watermark-location {
+    font-size: 0.76rem;
+  }
+
+  .watermark-credit {
+    font-size: 0.68rem;
   }
 }
