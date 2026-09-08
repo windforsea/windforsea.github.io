@@ -147,7 +147,7 @@ html, body {
 }
 
 /* ==========================================================================
-   상단 3개 책갈피 리본 탭 (부채꼴 Fan 형태 인터랙션)
+   상단 3개 책갈피 리본 탭 (가로 겹침 & 옆으로 슬라이드 펼쳐짐 인터랙션)
    ========================================================================== */
 .bookmarks-nav {
   position: relative;
@@ -160,10 +160,10 @@ html, body {
   z-index: 40;
 }
 
-.bookmarks-fan {
+.bookmarks-stack {
   position: relative;
-  width: 250px;
-  height: 62px;
+  width: 310px;
+  height: 56px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -181,8 +181,8 @@ html, body {
   cursor: pointer;
   outline: none;
   padding: 0;
-  transform-origin: 50% 120%;
-  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease;
+  transform-origin: bottom center;
+  transition: transform 0.36s cubic-bezier(0.2, 0.9, 0.3, 1), filter 0.22s ease;
   will-change: transform;
 }
 
@@ -226,37 +226,37 @@ html, body {
   background: var(--ribbon-space-bg);
 }
 
-/* --- [1] 기본 상태: 부채처럼 한곳에 포개져 모여있는 상태 --- */
+/* --- [1] 기본 상태: 가로로 3개 겹쳐져 있는 상태 (회전 없이 일직선) --- */
 .bookmark-ribbon.ribbon-about {
   left: 50%;
-  transform: translateX(-68%) rotate(-12deg);
-  z-index: 1;
+  transform: translateX(calc(-50% - 32px));
+  z-index: 3;
 }
 .bookmark-ribbon.ribbon-projects {
   left: 50%;
-  transform: translateX(-50%) rotate(0deg);
+  transform: translateX(-50%);
   z-index: 2;
 }
 .bookmark-ribbon.ribbon-space {
   left: 50%;
-  transform: translateX(-32%) rotate(12deg);
-  z-index: 3;
+  transform: translateX(calc(-50% + 32px));
+  z-index: 1;
 }
 
-/* 기본 상태에서 현재 활성 챕터는 살짝 솟아올라 표시 */
+/* 기본 상태에서 현재 활성 챕터는 살짝 위로 솟아올라 표시 */
 .bookmark-ribbon.active {
   filter: drop-shadow(0 4px 14px rgba(255, 255, 255, 0.35));
 }
 .bookmark-ribbon.ribbon-about.active {
-  transform: translateX(-68%) rotate(-12deg) translateY(-8px);
+  transform: translateX(calc(-50% - 32px)) translateY(-6px);
   z-index: 5;
 }
 .bookmark-ribbon.ribbon-projects.active {
-  transform: translateX(-50%) rotate(0deg) translateY(-8px);
+  transform: translateX(-50%) translateY(-6px);
   z-index: 5;
 }
 .bookmark-ribbon.ribbon-space.active {
-  transform: translateX(-32%) rotate(12deg) translateY(-8px);
+  transform: translateX(calc(-50% + 32px)) translateY(-6px);
   z-index: 5;
 }
 .bookmark-ribbon.active .ribbon-text {
@@ -264,44 +264,44 @@ html, body {
   border-top-color: rgba(255, 255, 255, 0.9);
 }
 
-/* --- [2] 마우스 호버 상태: 부채가 촤르륵 좌/중/우로 넓게 펼쳐짐 --- */
-.bookmarks-fan:hover .bookmark-ribbon.ribbon-about {
-  transform: translateX(-120%) rotate(-20deg) translateY(-6px);
+/* --- [2] 마우스 호버 상태: 가로 양옆으로 스르륵 펼쳐짐 --- */
+.bookmarks-stack:hover .bookmark-ribbon.ribbon-about {
+  transform: translateX(calc(-50% - 104px)) translateY(-3px);
   z-index: 4;
 }
-.bookmarks-fan:hover .bookmark-ribbon.ribbon-projects {
-  transform: translateX(-50%) rotate(0deg) translateY(-14px);
+.bookmarks-stack:hover .bookmark-ribbon.ribbon-projects {
+  transform: translateX(-50%) translateY(-3px);
   z-index: 4;
 }
-.bookmarks-fan:hover .bookmark-ribbon.ribbon-space {
-  transform: translateX(20%) rotate(20deg) translateY(-6px);
+.bookmarks-stack:hover .bookmark-ribbon.ribbon-space {
+  transform: translateX(calc(-50% + 104px)) translateY(-3px);
   z-index: 4;
 }
 
-/* 호버 시 활성화된 리본 위치 보정 */
-.bookmarks-fan:hover .bookmark-ribbon.ribbon-about.active {
-  transform: translateX(-120%) rotate(-20deg) translateY(-14px);
+/* 호버 시 활성화된 리본 위치 */
+.bookmarks-stack:hover .bookmark-ribbon.ribbon-about.active {
+  transform: translateX(calc(-50% - 104px)) translateY(-8px);
 }
-.bookmarks-fan:hover .bookmark-ribbon.ribbon-projects.active {
-  transform: translateX(-50%) rotate(0deg) translateY(-20px);
+.bookmarks-stack:hover .bookmark-ribbon.ribbon-projects.active {
+  transform: translateX(-50%) translateY(-8px);
 }
-.bookmarks-fan:hover .bookmark-ribbon.ribbon-space.active {
-  transform: translateX(20%) rotate(20deg) translateY(-14px);
+.bookmarks-stack:hover .bookmark-ribbon.ribbon-space.active {
+  transform: translateX(calc(-50% + 104px)) translateY(-8px);
 }
 
-/* --- [3] 개별 리본에 마우스가 닿았을 때 (더욱 위로 솟아오름) --- */
-.bookmarks-fan .bookmark-ribbon:hover {
+/* --- [3] 개별 리본에 마우스가 직접 닿았을 때 위로 쏙 당겨짐 --- */
+.bookmarks-stack .bookmark-ribbon:hover {
   filter: brightness(1.18) drop-shadow(0 8px 24px rgba(0, 0, 0, 0.6));
   z-index: 10 !important;
 }
-.bookmarks-fan:hover .bookmark-ribbon.ribbon-about:hover {
-  transform: translateX(-120%) rotate(-20deg) translateY(-22px) scale(1.06);
+.bookmarks-stack:hover .bookmark-ribbon.ribbon-about:hover {
+  transform: translateX(calc(-50% - 104px)) translateY(-16px) scale(1.04);
 }
-.bookmarks-fan:hover .bookmark-ribbon.ribbon-projects:hover {
-  transform: translateX(-50%) rotate(0deg) translateY(-26px) scale(1.06);
+.bookmarks-stack:hover .bookmark-ribbon.ribbon-projects:hover {
+  transform: translateX(-50%) translateY(-16px) scale(1.04);
 }
-.bookmarks-fan:hover .bookmark-ribbon.ribbon-space:hover {
-  transform: translateX(20%) rotate(20deg) translateY(-22px) scale(1.06);
+.bookmarks-stack:hover .bookmark-ribbon.ribbon-space:hover {
+  transform: translateX(calc(-50% + 104px)) translateY(-16px) scale(1.04);
 }
 
 /* ==========================================================================
@@ -1128,14 +1128,30 @@ html, body {
     margin-bottom: -6px;
   }
 
-  .bookmarks-fan {
-    width: 200px;
-    height: 54px;
+  .bookmarks-stack {
+    width: 250px;
+    height: 50px;
   }
 
   .bookmark-ribbon .ribbon-text {
     font-size: 0.76rem;
     padding: 7px 12px 5px;
+  }
+
+  .bookmarks-stack:hover .bookmark-ribbon.ribbon-about {
+    transform: translateX(calc(-50% - 80px)) translateY(-2px);
+  }
+  .bookmarks-stack:hover .bookmark-ribbon.ribbon-space {
+    transform: translateX(calc(-50% + 80px)) translateY(-2px);
+  }
+  .bookmarks-stack:hover .bookmark-ribbon.ribbon-about:hover {
+    transform: translateX(calc(-50% - 80px)) translateY(-12px) scale(1.03);
+  }
+  .bookmarks-stack:hover .bookmark-ribbon.ribbon-projects:hover {
+    transform: translateX(-50%) translateY(-12px) scale(1.03);
+  }
+  .bookmarks-stack:hover .bookmark-ribbon.ribbon-space:hover {
+    transform: translateX(calc(-50% + 80px)) translateY(-12px) scale(1.03);
   }
 
   .book-spine-container {
