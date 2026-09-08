@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | windforsea</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="subpage">
+
+  <!-- 전체 화면 배경 이미지 (블러 효과 적용) -->
+  <div class="background-container">
+    <img 
+      src="assets/home-hero.jpg" 
+      alt="눈이 편안하고 따뜻한 아침 풍경" 
+      class="background-image" 
+    />
+    <div class="background-overlay"></div>
+  </div>
+
+  <!-- 최상단 내비게이션 바 -->
+  <header class="top-nav-bar">
+    <!-- 좌측 상단 집모양 홈 버튼 -->
+    <a href="index.html" class="home-btn" title="홈으로 이동" aria-label="홈으로 이동">
+      <svg viewBox="0 0 24 24">
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+      </svg>
+    </a>
+
+    <!-- 중앙 상단 3개 탭 (자기소개 활성화) -->
+    <nav class="tab-container" role="navigation" aria-label="메인 메뉴">
+      <a href="about.html" class="tab-link active">자기소개</a>
+      <a href="projects.html" class="tab-link">프로젝트</a>
+      <a href="space.html" class="tab-link">스페이스</a>
+    </nav>
+
+    <!-- 우측 대칭용 여백 -->
+    <div style="width: 48px; height: 48px;"></div>
+  </header>
+
+  <!-- 메인 자기소개 글래스 카드 -->
+  <main class="page-container">
+    <section class="glass-card">
+      <div class="about-hero">
+        <div class="about-avatar">
+          <div class="about-avatar-inner">🌊</div>
+        </div>
+        <div class="about-info">
+          <h2>windforsea</h2>
+          <p class="about-handle">@windforsea</p>
+          <p class="about-bio">
+            따뜻하고 자연스러운 인터랙션을 지향하는 웹 개발자입니다.<br />
+            군더더기 없는 미니멀한 UI와 일상에 편안함을 주는 디지털 경험을 만듭니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <!-- 보유 기술 스택 -->
+        <div class="sub-section">
+          <h3>🛠️ Skills & Tools</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">JavaScript (ES6+)</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Git / GitHub</span>
+            <span class="skill-tag">Figma</span>
+          </div>
+        </div>
+
+        <!-- 연락처 & 소셜 링크 -->
+        <div class="sub-section">
+          <h3>📫 Connect</h3>
+          <ul class="contact-list">
+            <li>
+              <a href="https://github.com/windforsea" target="_blank" rel="noopener noreferrer" class="contact-item">
+                <span>🐙</span>
+                <span>GitHub</span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:windforsea@example.com" class="contact-item">
+                <span>✉️</span>
+                <span>Email</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://windforsea.github.io" class="contact-item">
+                <span>🌐</span>
+                <span>Website</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 우측 하단 미니멀 워터마크 -->
+  <div class="watermark">
+    designed by @windforsea
+  </div>
+
+</body>
+</html>
