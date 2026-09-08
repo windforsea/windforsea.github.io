@@ -42,7 +42,7 @@
     <div style="width: 48px; height: 48px;"></div>
   </header>
 
-  <!-- 메인 스페이스 글래스 카드 (비어있는 공간) -->
+  <!-- 메인 스페이스 글래스 카드 (비어있는 공간 + 배경 사진 갤러리) -->
   <main class="page-container">
     <section class="glass-card">
       <div class="space-container">
@@ -53,8 +53,81 @@
           블로그 글, 사진 모음, 또는 새로운 시도를 자유롭게 채워 넣으실 수 있습니다.
         </p>
       </div>
+
+      <!-- 배경 사진 아카이브 갤러리 -->
+      <div class="space-gallery-section">
+        <div class="gallery-header">
+          <h3 class="gallery-title">📷 Background Archives</h3>
+          <p class="gallery-subtitle">웹사이트 곳곳에 담긴 울산의 풍경들 (클릭하여 미리보기)</p>
+        </div>
+
+        <div class="space-gallery-grid">
+          <!-- 사진 1: 대왕암 (홈) -->
+          <div class="photo-card" data-src="assets/sledo.jpg" data-title="울산광역시 대왕암" data-desc="홈 화면 배경 사진 (2400 × 1800)">
+            <div class="photo-thumb-wrapper">
+              <img src="assets/sledo.jpg" alt="울산광역시 대왕암" class="photo-thumb" loading="lazy" />
+              <div class="photo-badge">홈</div>
+            </div>
+            <div class="photo-info">
+              <h4 class="photo-title">울산 대왕암</h4>
+              <span class="photo-meta">Daewangam Park</span>
+            </div>
+          </div>
+
+          <!-- 사진 2: 선암호수공원 봄 (자기소개) -->
+          <div class="photo-card" data-src="assets/sunam1.jpg" data-title="선암호수공원 (봄)" data-desc="자기소개 페이지 배경 사진">
+            <div class="photo-thumb-wrapper">
+              <img src="assets/sunam1.jpg" alt="선암호수공원 (봄)" class="photo-thumb" loading="lazy" />
+              <div class="photo-badge">자기소개</div>
+            </div>
+            <div class="photo-info">
+              <h4 class="photo-title">선암호수공원 (봄)</h4>
+              <span class="photo-meta">Seonam Lake Park</span>
+            </div>
+          </div>
+
+          <!-- 사진 3: 선암호수공원 산책로 (프로젝트) -->
+          <div class="photo-card" data-src="assets/sunam2.jpg" data-title="선암호수공원 (산책로)" data-desc="프로젝트 페이지 배경 사진">
+            <div class="photo-thumb-wrapper">
+              <img src="assets/sunam2.jpg" alt="선암호수공원 (산책로)" class="photo-thumb" loading="lazy" />
+              <div class="photo-badge">프로젝트</div>
+            </div>
+            <div class="photo-info">
+              <h4 class="photo-title">선암호수공원 (산책로)</h4>
+              <span class="photo-meta">Lake Promenade</span>
+            </div>
+          </div>
+
+          <!-- 사진 4: 슬도 (스페이스) -->
+          <div class="photo-card" data-src="assets/sledo2.jpg" data-title="울산광역시 슬도" data-desc="스페이스 페이지 배경 사진">
+            <div class="photo-thumb-wrapper">
+              <img src="assets/sledo2.jpg" alt="울산광역시 슬도" class="photo-thumb" loading="lazy" />
+              <div class="photo-badge">스페이스</div>
+            </div>
+            <div class="photo-info">
+              <h4 class="photo-title">울산 슬도</h4>
+              <span class="photo-meta">Seuldo Island</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
+
+  <!-- 컴팩트 사진 모달 팝업 (너무 크게 확대되지 않는 적당한 크기) -->
+  <div class="photo-modal" id="photoModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="photo-modal-backdrop"></div>
+    <div class="photo-modal-content">
+      <button type="button" class="modal-close-btn" aria-label="닫기">✕</button>
+      <div class="modal-img-container">
+        <img src="" alt="" class="modal-img" id="modalImg" />
+      </div>
+      <div class="modal-caption">
+        <h4 id="modalTitle"></h4>
+        <p id="modalDesc"></p>
+      </div>
+    </div>
+  </div>
 
   <!-- 우측 하단 미니멀 워터마크 -->
   <div class="watermark">
