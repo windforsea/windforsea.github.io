@@ -1,12 +1,200 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>windforsea</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>windforsea | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Hello, World!</h1>
-  <p>windforsea의 GitHub Pages입니다.</p>
+
+  <!-- ======================================================================
+       최상단 가로 탭 네비게이션 헤더
+       ====================================================================== -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#" class="logo">
+        <span class="logo-dot"></span>
+        <span>windforsea</span>
+      </a>
+
+      <!-- 가로 탭 버튼 영역 -->
+      <nav class="tab-nav" role="tablist" aria-label="메인 메뉴">
+        <button class="tab-btn active" data-target="about" role="tab" aria-selected="true" aria-controls="about">
+          👤 자기소개
+        </button>
+        <button class="tab-btn" data-target="projects" role="tab" aria-selected="false" aria-controls="projects">
+          📂 프로젝트
+        </button>
+        <button class="tab-btn" data-target="more" role="tab" aria-selected="false" aria-controls="more">
+          ✨ 탭 3
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       메인 콘텐츠 영역 (탭 패널)
+       ====================================================================== -->
+  <main class="main-content">
+
+    <!-- 1탭: 자기소개 (About Me) -->
+    <section id="about" class="tab-panel active" role="tabpanel" aria-labelledby="about-tab">
+      <div class="about-hero">
+        <div class="profile-avatar">🌊</div>
+        <div class="hero-text">
+          <h1>안녕하세요, windforsea입니다</h1>
+          <p class="hero-role">Frontend & Web Developer</p>
+          <p class="hero-desc">
+            문제를 해결하고 사용자 경험을 개선하는 웹 인터페이스를 만듭니다.<br />
+            새로운 기술을 탐구하고 깔끔하며 유지보수하기 좋은 코드를 작성하는 것을 좋아합니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <!-- 보유 기술 스택 카드 -->
+        <div class="card">
+          <h2>🛠️ 기술 스택 (Skills)</h2>
+
+          <div class="skill-category">
+            <div class="skill-title">Frontend</div>
+            <div class="tag-list">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3 / SCSS</span>
+              <span class="tag">JavaScript (ES6+)</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">React</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-title">Tools & Others</div>
+            <div class="tag-list">
+              <span class="tag">Git / GitHub</span>
+              <span class="tag">VS Code</span>
+              <span class="tag">Figma</span>
+              <span class="tag">Vite</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 연락처 및 링크 카드 -->
+        <div class="card">
+          <h2>📫 연락처 & 링크</h2>
+          <ul class="contact-list">
+            <li>
+              <a href="https://github.com/windforsea" target="_blank" rel="noopener noreferrer" class="contact-item">
+                <span class="contact-icon">🐙</span>
+                <span>github.com/windforsea</span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:your-email@example.com" class="contact-item">
+                <span class="contact-icon">✉️</span>
+                <span>your-email@example.com</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://windforsea.github.io" target="_blank" rel="noopener noreferrer" class="contact-item">
+                <span class="contact-icon">🌐</span>
+                <span>windforsea.github.io</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2탭: 프로젝트 소개 (Projects) -->
+    <section id="projects" class="tab-panel" role="tabpanel" aria-labelledby="projects-tab">
+      <div class="section-header">
+        <h1>작업한 프로젝트</h1>
+        <p>직접 기획하고 개발한 주요 프로젝트들을 소개합니다.</p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- 프로젝트 1 -->
+        <article class="project-card">
+          <div class="project-cover">💻</div>
+          <div class="project-body">
+            <h3 class="project-title">개인 포트폴리오 웹사이트</h3>
+            <p class="project-desc">
+              HTML, CSS, 바닐라 자바스크립트로 가볍고 빠르게 동작하도록 제작한 탭 기반 포트폴리오 웹사이트입니다.
+            </p>
+            <div class="project-tech">
+              <span class="tech-badge">HTML5</span>
+              <span class="tech-badge">CSS3</span>
+              <span class="tech-badge">JavaScript</span>
+            </div>
+            <div class="project-links">
+              <a href="https://windforsea.github.io" target="_blank" class="btn-link">데모 보러가기 →</a>
+              <a href="https://github.com/windforsea/windforsea.github.io" target="_blank" class="btn-link">GitHub 코드 →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 프로젝트 2 -->
+        <article class="project-card">
+          <div class="project-cover">📊</div>
+          <div class="project-body">
+            <h3 class="project-title">인터랙티브 웹 대시보드</h3>
+            <p class="project-desc">
+              데이터 시각화 차트와 실시간 필터링 기능을 제공하는 반응형 웹 대시보드 프로젝트입니다.
+            </p>
+            <div class="project-tech">
+              <span class="tech-badge">JavaScript</span>
+              <span class="tech-badge">Chart.js</span>
+              <span class="tech-badge">CSS Grid</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="btn-link">데모 준비 중 →</a>
+              <a href="#" class="btn-link">GitHub 코드 →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 프로젝트 3 -->
+        <article class="project-card">
+          <div class="project-cover">⚡</div>
+          <div class="project-body">
+            <h3 class="project-title">웹 기반 생산성 유틸리티</h3>
+            <p class="project-desc">
+              로컬 스토리지와 연동하여 할 일 및 일정 관리를 도와주는 가벼운 생산성 웹 도구입니다.
+            </p>
+            <div class="project-tech">
+              <span class="tech-badge">HTML/CSS</span>
+              <span class="tech-badge">Vanilla JS</span>
+              <span class="tech-badge">Web Storage</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="btn-link">데모 준비 중 →</a>
+              <a href="#" class="btn-link">GitHub 코드 →</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3탭: 비어있는 탭 (More / 빈 공간) -->
+    <section id="more" class="tab-panel" role="tabpanel" aria-labelledby="more-tab">
+      <div class="empty-state">
+        <div class="empty-icon">🌱</div>
+        <h2 class="empty-title">새로운 공간</h2>
+        <p class="empty-desc">
+          이 탭은 현재 비어 있습니다.<br />
+          블로그, 방명록, 갤러리 등 원하는 새로운 콘텐츠를 자유롭게 채워 넣으실 수 있습니다.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="site-footer">
+    <p>&copy; 2026 windforsea. All rights reserved. Built with HTML, CSS, and JavaScript.</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
