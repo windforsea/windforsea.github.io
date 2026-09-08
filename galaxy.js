@@ -167,18 +167,41 @@ function initNebulaCanvas() {
     });
   }
 
+  // 모바일 터치 및 데스크톱 클릭 제어 (단순 세로 스크롤 시 충격파 방지)
+  let touchStartPos = { x: 0, y: 0, time: 0 };
+  let isTouchDevice = false;
+
+  window.addEventListener('touchstart', (e) => {
+    isTouchDevice = true;
+    if (e.touches && e.touches[0]) {
+      touchStartPos.x = e.touches[0].clientX;
+      touchStartPos.y = e.touches[0].clientY;
+      touchStartPos.time = Date.now();
+      onPointerMove(e);
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', (e) => {
+    if (e.changedTouches && e.changedTouches[0]) {
+      const touch = e.changedTouches[0];
+      const dist = Math.hypot(touch.clientX - touchStartPos.x, touch.clientY - touchStartPos.y);
+      const duration = Date.now() - touchStartPos.time;
+
+      // 화면을 탭(Tap)했을 때만 쇼크웨이브 생성 (스크롤/드래그 제외)
+      if (dist < 15 && duration < 350 && !e.target.closest('a, button, input, .deck-card, .deck-ctrl-btn, .edition-btn')) {
+        triggerShockwave(touch.clientX, touch.clientY);
+      }
+    }
+  }, { passive: true });
+
   window.addEventListener('click', (e) => {
-    // 인터랙티브 버튼 클릭이 아닐 때 파동 생성
-    if (!e.target.closest('a, button, input, .deck-card')) {
+    // 터치 기기의 가상 click 이벤트 중복 방지
+    if (isTouchDevice && Date.now() - touchStartPos.time < 500) return;
+
+    if (!e.target.closest('a, button, input, .deck-card, .deck-ctrl-btn, .edition-btn')) {
       triggerShockwave(e.clientX, e.clientY);
     }
   });
-
-  window.addEventListener('touchstart', (e) => {
-    if (e.touches && e.touches[0] && !e.target.closest('a, button, input')) {
-      triggerShockwave(e.touches[0].clientX, e.touches[0].clientY);
-    }
-  }, { passive: true });
 
   // 리사이즈 처리
   let resizeTimer;
@@ -385,6 +408,38 @@ function initDeckCarousel() {
             updateDeck(currentIndex - 1);
           }
           setTimeout(() => { wheelDebounce = false; }, 400);
+        }
+      }
+    }, { passive: true });
+
+    // 모바일 터치 스와이프 지원 (좌우 넘김)
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+
+    carouselWrapper.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches[0]) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+      }
+    }, { passive: true });
+
+    carouselWrapper.addEventListener('touchend', (e) => {
+      if (e.changedTouches && e.changedTouches[0]) {
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+        const duration = Date.now() - touchStartTime;
+
+        // 수평 스와이프 판정: X축 이동량이 35px 이상이고 수직 이동량보다 클 때
+        if (Math.abs(diffX) > 35 && Math.abs(diffX) > Math.abs(diffY) * 1.2 && duration < 600) {
+          if (diffX < 0) {
+            updateDeck(currentIndex + 1); // 좌로 밀기 -> 다음 카드
+          } else {
+            updateDeck(currentIndex - 1); // 우로 밀기 -> 이전 카드
+          }
         }
       }
     }, { passive: true });

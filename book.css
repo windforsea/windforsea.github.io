@@ -1229,3 +1229,43 @@ html, body {
     padding: 30px 20px 24px 28px;
   }
 }
+
+@media (max-width: 480px) {
+  .book-top-bar {
+    padding: 0 12px;
+    top: 12px;
+  }
+
+  .version-switch-btn .btn-text {
+    display: none;
+  }
+
+  .version-switch-btn {
+    padding: 6px 10px;
+    gap: 0;
+  }
+
+  .page-counter-pill {
+    font-size: 0.72rem;
+    padding: 5px 10px;
+    max-width: 170px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .book-wrapper {
+    padding: 74px 10px 50px;
+  }
+
+  .bookmarks-stack {
+    width: 220px;
+    height: 44px;
+  }
+
+  .bookmark-ribbon .ribbon-text {
+    font-size: 0.72rem;
+    padding: 6px 11px 18px;
+  }
+}
+

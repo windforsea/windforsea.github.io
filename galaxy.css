@@ -849,6 +849,7 @@ body {
   align-items: center;
   justify-content: center;
   margin-bottom: 28px;
+  touch-action: pan-y;
 }
 
 .deck-carousel {

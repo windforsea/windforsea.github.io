@@ -125,25 +125,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 모바일 터치 스와이프 지원
+  // 모바일 터치 스와이프 지원 (세로 스크롤과 간섭 방지)
   let touchStartX = 0;
+  let touchStartY = 0;
   let touchEndX = 0;
+  let touchEndY = 0;
+  let touchStartTime = 0;
 
   if (bookContainer) {
     bookContainer.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+      touchStartTime = Date.now();
     }, { passive: true });
 
     bookContainer.addEventListener('touchend', (e) => {
       touchEndX = e.changedTouches[0].screenX;
+      touchEndY = e.changedTouches[0].screenY;
       handleSwipe();
     }, { passive: true });
   }
 
   function handleSwipe() {
-    const swipeDistance = touchEndX - touchStartX;
-    if (Math.abs(swipeDistance) > 40) {
-      if (swipeDistance < 0) {
+    const diffX = touchEndX - touchStartX;
+    const diffY = touchEndY - touchStartY;
+    const duration = Date.now() - touchStartTime;
+
+    // 수평 이동량이 45px 이상이고, 수직 이동량의 1.3배 이상이며, 600ms 이내의 스와이프만 책장 넘김으로 인식
+    if (Math.abs(diffX) > 45 && Math.abs(diffX) > Math.abs(diffY) * 1.3 && duration < 600) {
+      if (diffX < 0) {
         // 우에서 좌로 스와이프 (다음 페이지)
         goToPage(currentPage + 1);
       } else {
