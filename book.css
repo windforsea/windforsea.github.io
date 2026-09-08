@@ -711,6 +711,37 @@ html, body {
   color: var(--accent-blue);
 }
 
+/* 현장 이력 타임라인 (책자용) */
+.exp-timeline {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.exp-timeline li {
+  position: relative;
+  padding-left: 14px;
+  line-height: 1.48;
+  word-break: keep-all;
+}
+
+.exp-timeline li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  top: 1px;
+  font-size: 0.65rem;
+  color: var(--accent-blue);
+}
+
+.exp-timeline strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
 /* ==========================================================================
    Page 2: Projects Styling
    ========================================================================== */
