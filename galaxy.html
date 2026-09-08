@@ -130,8 +130,8 @@
           <div class="bento-icon">🏭</div>
           <h3 class="bento-title">Engineering Origin</h3>
           <p class="bento-text">
-            현대자동차 엔진 조립, 원자력 플랜트 및 조선소 전기 배선 현장에서 '오차 없는 공정과 시스템 신뢰성'을 배웠습니다.<br />
-            이제는 기계와 코드의 언어로 스마트팩토리 공정을 최적화하고 AI 파이프라인을 구축합니다.
+            게임 QA의 결함 추적, 원자력 플랜트·조선소 전기 공정, 카페 독립 운영과 현대자동차 엔진 조립 라인에서 '오차 없는 공정 준수와 위기 회복탄력성'을 체득했습니다.<br />
+            이제는 AI(Gemini)와 협업하여 스마트한 데이터 전처리 및 안정적인 시스템을 구축합니다.
           </p>
           <div class="bento-highlight-pill">Reliability • Precision • AI-Assisted</div>
         </div>
@@ -171,7 +171,7 @@
           </div>
           <div class="terminal-body" id="terminalBody">
             <div class="term-line"><span class="term-prompt">&gt;</span> <span class="term-cmd">whoami</span></div>
-            <div class="term-line term-out">"Skalen Seo — AI Operations & Smart Factory Builder"</div>
+            <div class="term-line term-out">"Skalen Seo — AI Operations & Systems Builder"</div>
             <div class="term-line"><span class="term-prompt">&gt;</span> <span class="term-cmd">cat philosophy.txt</span></div>
             <div class="term-line term-out">"도면과 엔진을 다루던 정밀함으로, 결함 없는 코드를 짓는다."</div>
             <div class="term-line"><span class="term-prompt">&gt;</span> <span class="term-cmd">system.status()</span></div>
@@ -211,7 +211,7 @@
       <div class="deck-stage-wrapper">
         <div class="deck-carousel" id="deckCarousel">
 
-          <!-- 프로젝트 카드 1 -->
+          <!-- 프로젝트 카드 1: 웹 쇼케이스 -->
           <article class="deck-card card-1 active" data-index="0">
             <div class="card-glare"></div>
             <div class="card-ambient-backdrop"></div>
@@ -235,81 +235,58 @@
             </div>
           </article>
 
-          <!-- 프로젝트 카드 2 -->
+          <!-- 프로젝트 카드 2: 울산 주차 분석 보고서 -->
           <article class="deck-card card-2" data-index="1">
             <div class="card-glare"></div>
             <div class="card-ambient-backdrop"></div>
             <div class="card-badge-row">
               <span class="proj-badge">DATA PIPELINE</span>
-              <span class="proj-tech">Python • Pandas</span>
+              <span class="proj-tech">Python • EDA & ROI</span>
             </div>
             <div class="deck-card-icon">📊</div>
-            <h3 class="deck-card-title">센서·공정 데이터 정제 & 이상치 분석</h3>
+            <h3 class="deck-card-title">울산 주차 공공데이터 분석 & ROI 모델링</h3>
             <p class="deck-card-desc">
-              Pandas DataFrame을 활용하여 불규칙한 시계열/로그 데이터의 결측치를 정제하고, 통계 기법(IQR, Z-Score)으로 설비 이상 징후를 탐지하는 실무 파이프라인입니다.
+              울산 남구 거주자우선주차 데이터 및 주차난 문제 해결을 위해 공유주차제 도입 타당성을 정량 분석한 프로젝트입니다. 결측치 정제, 통계 모델링, 동별 ROI 산출 및 지도 시각화 완결.
             </p>
             <div class="card-tags">
               <span>Pandas (DataFrame)</span>
-              <span>NumPy</span>
-              <span>이상치 탐지</span>
-              <span>공정 EDA</span>
+              <span>Matplotlib</span>
+              <span>Folium 지도</span>
+              <span>ROI 모델링</span>
             </div>
-            <div class="card-action-box">
-              <a href="https://github.com/windforsea" target="_blank" rel="noopener noreferrer" class="card-action-btn">
-                <span>GitHub 레포지토리</span>
+            <div class="card-action-box" style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <a href="ulsan_report.html" target="_blank" class="card-action-btn">
+                <span>종합 보고서 열람</span>
+                <span>↗</span>
+              </a>
+              <a href="ulsan_parking_map.html" target="_blank" class="card-action-btn" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.4);">
+                <span>지도 시각화</span>
                 <span>↗</span>
               </a>
             </div>
           </article>
 
-          <!-- 프로젝트 카드 3 -->
+          <!-- 프로젝트 카드 3: uv 뉴스 스크래퍼 -->
           <article class="deck-card card-3" data-index="2">
             <div class="card-glare"></div>
             <div class="card-ambient-backdrop"></div>
             <div class="card-badge-row">
               <span class="proj-badge">AUTOMATION</span>
-              <span class="proj-tech">Python • BS4</span>
+              <span class="proj-tech">Python 3.12 • uv</span>
             </div>
             <div class="deck-card-icon">⚡</div>
-            <h3 class="deck-card-title">지능형 웹 스크래핑 & 데이터 자동 수집기</h3>
+            <h3 class="deck-card-title">Modern Python(uv) 지능형 뉴스 스크래퍼</h3>
             <p class="deck-card-desc">
-              BeautifulSoup과 파이썬을 기반으로 비정형 웹 문서에서 필요한 정보를 선별 수집하고, 정형 CSV/데이터프레임으로 자동 변환·적재하는 업무 자동화 스크립트입니다.
+              초고속 패키지 관리자 uv 가상환경에서 BeautifulSoup4와 requests를 활용해 구축한 실시간 뉴스 헤드라인 및 본문 수집 자동화 도구입니다. HTTP 헤더 조작, 예외 처리, 정형 데이터 적재 자동화.
             </p>
             <div class="card-tags">
-              <span>Web Scraping</span>
-              <span>BeautifulSoup</span>
+              <span>Python 3.12</span>
+              <span>uv</span>
+              <span>BeautifulSoup4</span>
               <span>Automation</span>
-              <span>Gemini AI</span>
             </div>
             <div class="card-action-box">
-              <a href="https://github.com/windforsea" target="_blank" rel="noopener noreferrer" class="card-action-btn">
-                <span>GitHub 레포지토리</span>
-                <span>↗</span>
-              </a>
-            </div>
-          </article>
-
-          <!-- 프로젝트 카드 4 -->
-          <article class="deck-card card-4" data-index="3">
-            <div class="card-glare"></div>
-            <div class="card-ambient-backdrop"></div>
-            <div class="card-badge-row">
-              <span class="proj-badge">CASE STUDY</span>
-              <span class="proj-tech">System QA</span>
-            </div>
-            <div class="deck-card-icon">🛡️</div>
-            <h3 class="deck-card-title">시스템 결함 추적 & 소프트웨어 QA</h3>
-            <p class="deck-card-desc">
-              위메이드 MMORPG 신직업 QA 실무 경험을 체계화한 케이스 스터디입니다. 복잡한 시스템 상태 전이(State Machine)와 엣지 케이스를 사전에 검증하여 신뢰성을 확보합니다.
-            </p>
-            <div class="card-tags">
-              <span>QA Methodology</span>
-              <span>Test Case Design</span>
-              <span>Edge Case Analysis</span>
-              <span>방어적 개발</span>
-            </div>
-            <div class="card-action-box">
-              <a href="https://github.com/windforsea" target="_blank" rel="noopener noreferrer" class="card-action-btn">
+              <a href="https://github.com/windforsea/wepscraping-git" target="_blank" rel="noopener noreferrer" class="card-action-btn">
                 <span>GitHub 레포지토리</span>
                 <span>↗</span>
               </a>
@@ -328,7 +305,6 @@
         <button type="button" class="deck-dot active" data-index="0" aria-label="프로젝트 1"></button>
         <button type="button" class="deck-dot" data-index="1" aria-label="프로젝트 2"></button>
         <button type="button" class="deck-dot" data-index="2" aria-label="프로젝트 3"></button>
-        <button type="button" class="deck-dot" data-index="3" aria-label="프로젝트 4"></button>
       </div>
     </section>
 
