@@ -13,14 +13,17 @@
        ====================================================================== -->
   <header class="site-header">
     <div class="header-container">
-      <a href="#" class="logo">
+      <a href="#home" class="logo" data-target="home">
         <span class="logo-dot"></span>
         <span>windforsea</span>
       </a>
 
       <!-- 가로 탭 버튼 영역 -->
       <nav class="tab-nav" role="tablist" aria-label="메인 메뉴">
-        <button class="tab-btn active" data-target="about" role="tab" aria-selected="true" aria-controls="about">
+        <button class="tab-btn active" data-target="home" role="tab" aria-selected="true" aria-controls="home">
+          🌿 홈
+        </button>
+        <button class="tab-btn" data-target="about" role="tab" aria-selected="false" aria-controls="about">
           👤 자기소개
         </button>
         <button class="tab-btn" data-target="projects" role="tab" aria-selected="false" aria-controls="projects">
@@ -38,8 +41,29 @@
        ====================================================================== -->
   <main class="main-content">
 
+    <!-- 0탭: 홈 메인 (Home - 따뜻하고 눈이 편안한 이미지 중심) -->
+    <section id="home" class="tab-panel active" role="tabpanel" aria-labelledby="home-tab">
+      <div class="home-container">
+        <div class="home-image-wrapper">
+          <img 
+            src="assets/home-hero.jpg" 
+            alt="따뜻한 아침 햇살과 안개 낀 평화로운 풍경" 
+            class="home-image"
+          />
+        </div>
+        <div class="home-caption">
+          <div class="home-greeting">🌤️ 따뜻하고 편안한 공간</div>
+          <h1 class="home-title">바람과 바다처럼, 자연스럽게 머무르는 곳</h1>
+          <p class="home-desc">
+            눈의 피로를 덜어주는 편안한 빛과 따뜻한 여유를 담았습니다.<br />
+            상단 탭을 통해 자기소개와 작업한 프로젝트들을 둘러보실 수 있습니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- 1탭: 자기소개 (About Me) -->
-    <section id="about" class="tab-panel active" role="tabpanel" aria-labelledby="about-tab">
+    <section id="about" class="tab-panel" role="tabpanel" aria-labelledby="about-tab">
       <div class="about-hero">
         <div class="profile-avatar">🌊</div>
         <div class="hero-text">

@@ -38,6 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Support clicking the logo to go to home tab
+  const logo = document.querySelector('.logo');
+  if (logo) {
+    logo.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchTab('home');
+    });
+  }
+
   // Handle URL hash on initial load
   const currentHash = window.location.hash.replace('#', '');
   if (currentHash && document.getElementById(currentHash)) {
