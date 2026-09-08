@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Booklet Edition - windforsea
  * 우에서 좌로 넘기는 책자 인터랙션 & 상단 3개 책갈피 리본 제어
  */
@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const pageNames = [
     'Cover • 표지',
     'Chapter 01 • 자기소개',
-    'Chapter 02 • 프로젝트',
+    'Chapter 02 • 프로젝트 (1/2)',
+    'Chapter 02 • 프로젝트 (2/2)',
     'Chapter 03 • 스페이스'
   ];
 
@@ -37,10 +38,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // 2. 상단 3개 책갈피 리본 활성화 갱신
+    // 2. 상단 3개 책갈피 리본 활성화 갱신 (프로젝트는 1, 2페이지 모두 활성화 유지)
     bookmarks.forEach((bm) => {
       const pageNum = parseInt(bm.dataset.page, 10);
-      if (pageNum === currentPage) {
+      let isActive = false;
+      if (pageNum === 1 && currentPage === 1) {
+        isActive = true;
+      } else if (pageNum === 2 && (currentPage === 2 || currentPage === 3)) {
+        isActive = true;
+      } else if (pageNum === 4 && currentPage === 4) {
+        isActive = true;
+      }
+
+      if (isActive) {
         bm.classList.add('active');
       } else {
         bm.classList.remove('active');

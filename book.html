@@ -34,18 +34,18 @@
     <!-- 상단 3개 책갈피 탭 (가로 배치 & 위로 쏙 뽑아올림 인터랙션) -->
     <nav class="bookmarks-nav" aria-label="책갈피 내비게이션">
       <div class="bookmarks-stack" id="bookmarksStack">
-        <!-- 책갈피 1: 자기소개 -->
+        <!-- 책갈피 1: 자기소개 (Page 1) -->
         <button type="button" class="bookmark-ribbon ribbon-about" data-page="1" title="자기소개 챕터로 이동">
           <span class="ribbon-text">자기소개</span>
         </button>
 
-        <!-- 책갈피 2: 프로젝트 -->
+        <!-- 책갈피 2: 프로젝트 (Page 2 - 2개 페이지로 구성) -->
         <button type="button" class="bookmark-ribbon ribbon-projects" data-page="2" title="프로젝트 챕터로 이동">
           <span class="ribbon-text">프로젝트</span>
         </button>
 
-        <!-- 책갈피 3: 스페이스 -->
-        <button type="button" class="bookmark-ribbon ribbon-space" data-page="3" title="스페이스 챕터로 이동">
+        <!-- 책갈피 3: 스페이스 (Page 4) -->
+        <button type="button" class="bookmark-ribbon ribbon-space" data-page="4" title="스페이스 챕터로 이동">
           <span class="ribbon-text">스페이스</span>
         </button>
       </div>
@@ -75,7 +75,7 @@
               <span class="btn-arrow">→</span>
             </button>
 
-            <div class="cover-corner-hint">우측 책갈피를 당기거나 화살표를 눌러 페이지를 넘겨보세요 📖</div>
+            <div class="cover-corner-hint">상단 책갈피는 챕터 바로가기 • 좌우 화살표(← / →)로 세부 페이지 넘기기 📖</div>
           </div>
         </article>
 
@@ -138,12 +138,15 @@
           </div>
         </article>
 
-        <!-- ================= PAGE 2: 프로젝트 (Chapter 2) ================= -->
-        <article class="book-page page-projects" data-index="2">
+        <!-- ================= PAGE 2: 프로젝트 1페이지 (Chapter 2 Part 1) ================= -->
+        <article class="book-page page-projects page-projects-1" data-index="2">
           <div class="page-inner">
             <header class="chapter-header">
-              <span class="chapter-num">CHAPTER 02</span>
-              <h2 class="chapter-title">Projects</h2>
+              <div class="chapter-meta-line">
+                <span class="chapter-num">CHAPTER 02 • PART 1</span>
+                <span class="chapter-paging-hint">다음 프로젝트는 화살표(❯)로 넘겨보세요</span>
+              </div>
+              <h2 class="chapter-title">Featured Projects</h2>
             </header>
 
             <div class="projects-book-list">
@@ -182,12 +185,63 @@
               </div>
             </div>
 
-            <div class="page-number-footer">02 • Projects</div>
+            <div class="page-number-footer">02 • Projects (1/2)</div>
           </div>
         </article>
 
-        <!-- ================= PAGE 3: 스페이스 (Chapter 3) ================= -->
-        <article class="book-page page-space" data-index="3">
+        <!-- ================= PAGE 3: 프로젝트 2페이지 (Chapter 2 Part 2) ================= -->
+        <article class="book-page page-projects page-projects-2" data-index="3">
+          <div class="page-inner">
+            <header class="chapter-header">
+              <div class="chapter-meta-line">
+                <span class="chapter-num">CHAPTER 02 • PART 2</span>
+                <span class="chapter-paging-hint">❮ 이전 프로젝트 / 스페이스 ❯</span>
+              </div>
+              <h2 class="chapter-title">Ongoing & Lab Works</h2>
+            </header>
+
+            <div class="projects-book-list">
+              <!-- 프로젝트 3 -->
+              <div class="book-project-card">
+                <div class="bp-icon">📖</div>
+                <div class="bp-content">
+                  <div class="bp-header">
+                    <h4>인터랙티브 3D 북클릿 저널</h4>
+                    <div class="bp-tags">
+                      <span class="bp-tag">HTML5</span>
+                      <span class="bp-tag">3D CSS</span>
+                      <span class="bp-tag">JavaScript</span>
+                    </div>
+                  </div>
+                  <p>종이 책장의 질감과 슬라이드 넘김, 입체 책갈피 탭을 브라우저에 사실적으로 구현한 디지털 저널 에디션입니다.</p>
+                  <span class="bp-badge-curr">현재 열람 중인 에디션</span>
+                </div>
+              </div>
+
+              <!-- 프로젝트 4 -->
+              <div class="book-project-card">
+                <div class="bp-icon">💎</div>
+                <div class="bp-content">
+                  <div class="bp-header">
+                    <h4>블루 사파이어 리퀴드 글래스 UI</h4>
+                    <div class="bp-tags">
+                      <span class="bp-tag">Glassmorphism</span>
+                      <span class="bp-tag">Liquid Glass</span>
+                      <span class="bp-tag">iOS Droplet</span>
+                    </div>
+                  </div>
+                  <p>빛 굴절과 앰비언트 라이트 오브, 애플 비전 스타일의 물방울 버튼을 결합한 럭셔리 블루 사파이어 테마입니다.</p>
+                  <a href="index.html" class="bp-link">사파이어 에디션 체험하기 →</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="page-number-footer">02 • Projects (2/2)</div>
+          </div>
+        </article>
+
+        <!-- ================= PAGE 4: 스페이스 (Chapter 3) ================= -->
+        <article class="book-page page-space" data-index="4">
           <div class="page-inner">
             <header class="chapter-header">
               <span class="chapter-num">CHAPTER 03</span>
@@ -210,7 +264,7 @@
               
               <div class="book-gallery-grid">
                 <!-- 1: 대왕암 -->
-                <div class="b-photo-card" data-src="assets/sledo.jpg" data-title="울산광역시 대왕암" data-desc="홈 화면 배경 사진 (2400 × 1800)">
+                <div class="b-photo-card" data-src="assets/sledo.jpg" data-title="울산광역시 대왕암" data-desc="울산광역시 동구 일산동 • 기암괴석과 푸른 동해 바다">
                   <div class="b-thumb-wrap">
                     <img src="assets/sledo.jpg" alt="울산 대왕암" class="b-thumb" loading="lazy" />
                   </div>
@@ -221,7 +275,7 @@
                 </div>
 
                 <!-- 2: 선암호수공원 봄 -->
-                <div class="b-photo-card" data-src="assets/sunam1.jpg" data-title="선암호수공원 (봄)" data-desc="자기소개 페이지 배경 사진">
+                <div class="b-photo-card" data-src="assets/sunam1.jpg" data-title="선암호수공원 (봄)" data-desc="울산광역시 남구 선암동 • 호수 산책로와 숲의 정취">
                   <div class="b-thumb-wrap">
                     <img src="assets/sunam1.jpg" alt="선암호수공원 봄" class="b-thumb" loading="lazy" />
                   </div>
@@ -232,7 +286,7 @@
                 </div>
 
                 <!-- 3: 선암호수공원 산책로 -->
-                <div class="b-photo-card" data-src="assets/sunam2.jpg" data-title="선암호수공원 (산책로)" data-desc="프로젝트 페이지 배경 사진">
+                <div class="b-photo-card" data-src="assets/sunam2.jpg" data-title="선암호수공원 (산책로)" data-desc="울산광역시 남구 선암동 • 잔잔한 호수 수변 데크길">
                   <div class="b-thumb-wrap">
                     <img src="assets/sunam2.jpg" alt="선암호수공원 산책로" class="b-thumb" loading="lazy" />
                   </div>
@@ -243,7 +297,7 @@
                 </div>
 
                 <!-- 4: 슬도 -->
-                <div class="b-photo-card" data-src="assets/sledo2.jpg" data-title="울산광역시 슬도" data-desc="스페이스 페이지 배경 사진">
+                <div class="b-photo-card" data-src="assets/sledo2.jpg" data-title="울산광역시 슬도" data-desc="울산광역시 동구 방어동 • 슬도 등대와 시원한 파도 소리">
                   <div class="b-thumb-wrap">
                     <img src="assets/sledo2.jpg" alt="울산 슬도" class="b-thumb" loading="lazy" />
                   </div>
@@ -268,12 +322,13 @@
 
   </div>
 
-  <!-- 하단 페이지 도트 인디케이터 -->
+  <!-- 하단 페이지 도트 인디케이터 (총 5개 페이지) -->
   <div class="book-dots" id="bookDots">
     <button type="button" class="dot active" data-index="0" aria-label="표지"></button>
     <button type="button" class="dot" data-index="1" aria-label="자기소개"></button>
-    <button type="button" class="dot" data-index="2" aria-label="프로젝트"></button>
-    <button type="button" class="dot" data-index="3" aria-label="스페이스"></button>
+    <button type="button" class="dot" data-index="2" aria-label="프로젝트 1"></button>
+    <button type="button" class="dot" data-index="3" aria-label="프로젝트 2"></button>
+    <button type="button" class="dot" data-index="4" aria-label="스페이스"></button>
   </div>
 
   <!-- 컴팩트 사진 모달 팝업 (너무 크게 확대되지 않음) -->
