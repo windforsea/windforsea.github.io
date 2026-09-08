@@ -1,16 +1,14 @@
 /* ==========================================================================
-   Instagram Aesthetic Portfolio - Pure HTML / CSS / JS
+   Instagram Aesthetic Portfolio - Pure HTML / CSS
    ========================================================================== */
 
 :root {
   --font-main: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
-  --font-serif: "Playfair Display", Georgia, serif;
   --font-mono: "SF Mono", "Consolas", Menlo, monospace;
   
-  --glass-bg: rgba(255, 255, 255, 0.72);
-  --glass-bg-hover: rgba(255, 255, 255, 0.88);
+  --glass-bg: rgba(255, 255, 255, 0.75);
   --glass-border: rgba(255, 255, 255, 0.45);
-  --glass-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.16), 0 4px 12px rgba(0, 0, 0, 0.06);
+  --glass-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.18), 0 4px 12px rgba(0, 0, 0, 0.05);
   
   --text-pure-white: #ffffff;
   --text-dark: #1e293b;
@@ -19,7 +17,7 @@
   
   --radius-full: 9999px;
   --radius-card: 24px;
-  --transition-smooth: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition-smooth: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 * {
@@ -30,8 +28,7 @@
 
 html, body {
   width: 100%;
-  height: 100%;
-  overflow-x: hidden;
+  min-height: 100%;
   font-family: var(--font-main);
   background-color: #0f172a;
   color: var(--text-dark);
@@ -55,15 +52,14 @@ html, body {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transform: scale(1.01);
-  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.5s ease;
   filter: brightness(0.92) contrast(1.02);
 }
 
-/* 탭이 열렸을 때 배경을 살짝 어둡고 부드럽게 블러 처리 */
-body.content-active .background-image {
-  filter: brightness(0.7) blur(8px);
-  transform: scale(1.06);
+/* 서브 페이지(About, Projects, Space) 접속 시 배경을 살짝 소프트 블러 */
+body.subpage .background-image {
+  filter: brightness(0.72) blur(8px);
+  transform: scale(1.04);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
 }
 
 .background-overlay {
@@ -71,9 +67,9 @@ body.content-active .background-image {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.25) 0%,
-    rgba(0, 0, 0, 0.05) 40%,
-    rgba(0, 0, 0, 0.3) 100%
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.03) 40%,
+    rgba(0, 0, 0, 0.25) 100%
   );
   pointer-events: none;
 }
@@ -91,7 +87,7 @@ body.content-active .background-image {
   justify-content: space-between;
   padding: 0 32px;
   z-index: 100;
-  pointer-events: none; /* 컨테이너 자체는 클릭 통과 */
+  pointer-events: none;
 }
 
 /* 좌측 상단 집모양 홈 버튼 */
@@ -118,21 +114,15 @@ body.content-active .background-image {
   width: 22px;
   height: 22px;
   fill: currentColor;
-  transition: transform 0.25s ease;
 }
 
 .home-btn:hover {
   background: rgba(255, 255, 255, 0.45);
   transform: scale(1.08);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
-}
-
-.home-btn:active {
-  transform: scale(0.95);
 }
 
 .home-btn.active {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.88);
   color: var(--text-dark);
 }
 
@@ -153,9 +143,8 @@ body.content-active .background-image {
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
 }
 
-.tab-btn {
-  background: transparent;
-  border: none;
+.tab-link {
+  display: inline-block;
   padding: 9px 22px;
   border-radius: var(--radius-full);
   font-family: var(--font-main);
@@ -163,18 +152,18 @@ body.content-active .background-image {
   font-weight: 500;
   letter-spacing: -0.01em;
   color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
   transition: var(--transition-smooth);
   white-space: nowrap;
 }
 
-.tab-btn:hover {
+.tab-link:hover {
   color: #ffffff;
   background: rgba(255, 255, 255, 0.18);
 }
 
-.tab-btn.active {
+.tab-link.active {
   background: rgba(255, 255, 255, 0.88);
   color: var(--text-dark);
   font-weight: 600;
@@ -183,56 +172,7 @@ body.content-active .background-image {
 }
 
 /* ==========================================================================
-   Home Hero Text (인스타 감성의 떠있는 타이포그래피)
-   ========================================================================== */
-.home-hero-text {
-  position: fixed;
-  bottom: 80px;
-  left: 48px;
-  z-index: 10;
-  max-width: 580px;
-  color: var(--text-pure-white);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  pointer-events: none;
-}
-
-body.content-active .home-hero-text {
-  opacity: 0;
-  transform: translateY(16px);
-  pointer-events: none;
-}
-
-.home-tagline {
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  font-style: italic;
-  letter-spacing: 0.04em;
-  opacity: 0.9;
-  margin-bottom: 8px;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-}
-
-.home-headline {
-  font-size: 2.6rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.25;
-  margin-bottom: 12px;
-  text-shadow: 0 3px 16px rgba(0, 0, 0, 0.45);
-  word-break: keep-all;
-}
-
-.home-subdesc {
-  font-size: 1.05rem;
-  font-weight: 400;
-  opacity: 0.85;
-  line-height: 1.6;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  word-break: keep-all;
-}
-
-/* ==========================================================================
-   Bottom Watermark / Metadata ("designed by @windforsea")
+   Bottom Watermark ("designed by @windforsea")
    ========================================================================== */
 .watermark {
   position: fixed;
@@ -246,8 +186,8 @@ body.content-active .home-hero-text {
   color: rgba(255, 255, 255, 0.65);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
   pointer-events: auto;
-  transition: opacity 0.25s ease;
   user-select: none;
+  transition: opacity 0.25s ease;
 }
 
 .watermark:hover {
@@ -255,9 +195,9 @@ body.content-active .home-hero-text {
 }
 
 /* ==========================================================================
-   Tab Content Panels (Glassmorphism Floating Card)
+   Subpage Glass Container & Cards
    ========================================================================== */
-.panels-wrapper {
+.page-container {
   position: relative;
   z-index: 20;
   width: 100%;
@@ -266,11 +206,9 @@ body.content-active .home-hero-text {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  pointer-events: none;
 }
 
-.content-panel {
-  display: none;
+.glass-card {
   width: 100%;
   max-width: 860px;
   background: var(--glass-bg);
@@ -280,18 +218,13 @@ body.content-active .home-hero-text {
   border-radius: var(--radius-card);
   padding: 44px;
   box-shadow: var(--glass-shadow);
-  pointer-events: auto;
-  animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.content-panel.active {
-  display: block;
+  animation: slideUpFade 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes slideUpFade {
   from {
     opacity: 0;
-    transform: translateY(24px) scale(0.98);
+    transform: translateY(20px) scale(0.98);
   }
   to {
     opacity: 1;
@@ -299,28 +232,27 @@ body.content-active .home-hero-text {
   }
 }
 
-/* Panel Header */
-.panel-header {
+.card-header {
   margin-bottom: 32px;
   text-align: center;
 }
 
-.panel-header h2 {
+.card-header h1 {
   font-size: 2rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   margin-bottom: 8px;
 }
 
-.panel-header p {
+.card-header p {
   color: var(--text-muted);
   font-size: 1rem;
 }
 
 /* ==========================================================================
-   Tab 1: About Me Styles (Instagram aesthetic profile)
+   About Page Styles
    ========================================================================== */
-.about-card-hero {
+.about-hero {
   display: flex;
   align-items: center;
   gap: 32px;
@@ -347,11 +279,11 @@ body.content-active .home-hero-text {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
+  font-size: 2.6rem;
 }
 
-.about-info h3 {
-  font-size: 1.6rem;
+.about-info h2 {
+  font-size: 1.65rem;
   font-weight: 700;
   margin-bottom: 4px;
 }
@@ -370,21 +302,20 @@ body.content-active .home-hero-text {
   word-break: keep-all;
 }
 
-/* About Grid */
-.about-sections-grid {
+.about-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 1.4fr 1fr;
   gap: 24px;
 }
 
-.sub-card {
+.sub-section {
   background: rgba(255, 255, 255, 0.6);
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 24px;
   border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
-.sub-card h4 {
+.sub-section h3 {
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 16px;
@@ -393,13 +324,13 @@ body.content-active .home-hero-text {
   gap: 8px;
 }
 
-.skill-pills {
+.skill-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-.skill-pill {
+.skill-tag {
   background: #ffffff;
   color: var(--text-dark);
   font-size: 0.85rem;
@@ -409,14 +340,14 @@ body.content-active .home-hero-text {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
-.contact-links {
+.contact-list {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.contact-link-item {
+.contact-item {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -426,20 +357,20 @@ body.content-active .home-hero-text {
   transition: color 0.2s ease;
 }
 
-.contact-link-item:hover {
+.contact-item:hover {
   color: var(--accent-color);
 }
 
 /* ==========================================================================
-   Tab 2: Projects Grid
+   Projects Page Styles
    ========================================================================== */
-.insta-projects-grid {
+.projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 20px;
 }
 
-.project-item {
+.project-card {
   background: rgba(255, 255, 255, 0.65);
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 18px;
@@ -449,7 +380,7 @@ body.content-active .home-hero-text {
   flex-direction: column;
 }
 
-.project-item:hover {
+.project-card:hover {
   transform: translateY(-4px);
   background: #ffffff;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
@@ -464,20 +395,20 @@ body.content-active .home-hero-text {
   font-size: 2.6rem;
 }
 
-.project-detail {
+.project-body {
   padding: 20px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.project-detail h4 {
+.project-body h3 {
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 8px;
 }
 
-.project-detail p {
+.project-body p {
   font-size: 0.88rem;
   color: var(--text-muted);
   line-height: 1.55;
@@ -501,43 +432,44 @@ body.content-active .home-hero-text {
   border-radius: 6px;
 }
 
-.project-link-action {
+.project-link {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--accent-color);
   text-decoration: none;
 }
 
-.project-link-action:hover {
+.project-link:hover {
   text-decoration: underline;
 }
 
 /* ==========================================================================
-   Tab 3: Empty Tab
+   Space Page Styles (Minimal Empty Tab)
    ========================================================================== */
-.empty-box {
+.space-container {
   text-align: center;
-  padding: 60px 20px;
+  padding: 80px 20px;
 }
 
-.empty-box-icon {
+.space-icon {
   font-size: 3rem;
   margin-bottom: 16px;
 }
 
-.empty-box h3 {
-  font-size: 1.35rem;
+.space-title {
+  font-size: 1.4rem;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
-.empty-box p {
+.space-desc {
   color: var(--text-muted);
   font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 /* ==========================================================================
-   Responsive Breakpoints
+   Responsive
    ========================================================================== */
 @media (max-width: 768px) {
   .top-nav-bar {
@@ -545,35 +477,25 @@ body.content-active .home-hero-text {
     top: 16px;
   }
 
-  .home-hero-text {
-    bottom: 60px;
-    left: 24px;
-    right: 24px;
-  }
-
-  .home-headline {
-    font-size: 2rem;
-  }
-
-  .tab-btn {
+  .tab-link {
     padding: 7px 14px;
     font-size: 0.82rem;
   }
 
-  .panels-wrapper {
+  .page-container {
     padding: 90px 16px 60px;
   }
 
-  .content-panel {
+  .glass-card {
     padding: 24px;
   }
 
-  .about-card-hero {
+  .about-hero {
     flex-direction: column;
     text-align: center;
   }
 
-  .about-sections-grid {
+  .about-grid {
     grid-template-columns: 1fr;
   }
 
