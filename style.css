@@ -15,13 +15,14 @@
                     inset 0 0 6px rgba(255, 255, 255, 0.25),
                     0 4px 12px rgba(0, 0, 0, 0.12);
 
-  --card-glass-bg: rgba(255, 255, 255, 0.1);
+  --tab-glass-bg: rgba(15, 23, 42, 0.42);
+  --card-glass-bg: rgba(15, 23, 42, 0.55);
   --card-glass-border: rgba(255, 255, 255, 0.24);
-  --card-glass-shadow: inset 0 1.5px 1px rgba(255, 255, 255, 0.5), 0 20px 40px -10px rgba(0, 0, 0, 0.22);
+  --card-glass-shadow: inset 0 1.5px 1px rgba(255, 255, 255, 0.35), 0 24px 48px -12px rgba(0, 0, 0, 0.4);
   
   --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.85);
-  --text-muted: rgba(255, 255, 255, 0.65);
+  --text-secondary: rgba(255, 255, 255, 0.92);
+  --text-muted: rgba(255, 255, 255, 0.72);
   --accent-blue: #38bdf8;
   
   --radius-pill: 9999px;
@@ -77,6 +78,14 @@ html, body {
     rgba(0, 0, 0, 0.25) 100%
   );
   pointer-events: none;
+}
+
+body.subpage .background-overlay {
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0.48) 100%
+  );
 }
 
 /* ==========================================================================
@@ -155,7 +164,7 @@ html, body {
   gap: 6px;
   padding: 6px 8px;
   border-radius: var(--radius-sub);
-  background: var(--card-glass-bg);
+  background: var(--tab-glass-bg);
   backdrop-filter: blur(28px) saturate(190%);
   -webkit-backdrop-filter: blur(28px) saturate(190%);
   border: 1px solid var(--card-glass-border);
@@ -225,9 +234,9 @@ body.subpage .tab-container:not(:hover) .tab-link.active {
 }
 
 body.subpage .tab-container:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.38);
-  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.6), 0 16px 36px rgba(0, 0, 0, 0.22);
+  background: rgba(15, 23, 42, 0.58);
+  border-color: rgba(255, 255, 255, 0.32);
+  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.4), 0 16px 36px rgba(0, 0, 0, 0.3);
   gap: 6px;
   padding: 6px 8px;
 }
@@ -260,8 +269,8 @@ body.subpage .tab-container:hover .tab-link {
   font-size: 0.82rem;
   font-weight: 500;
   letter-spacing: -0.01em;
-  color: rgba(255, 255, 255, 0.88);
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.75);
 }
 
 .watermark-credit {
@@ -269,8 +278,8 @@ body.subpage .tab-container:hover .tab-link {
   font-size: 0.74rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.65);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.78);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
 }
 
 .watermark:hover .watermark-credit {
@@ -295,8 +304,8 @@ body.subpage .tab-container:hover .tab-link {
   width: 100%;
   max-width: 860px;
   background: var(--card-glass-bg);
-  backdrop-filter: blur(28px) saturate(190%);
-  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  backdrop-filter: blur(32px) saturate(190%);
+  -webkit-backdrop-filter: blur(32px) saturate(190%);
   border: 1px solid var(--card-glass-border);
   border-radius: var(--radius-card);
   padding: 44px;
@@ -326,14 +335,14 @@ body.subpage .tab-container:hover .tab-link {
   font-weight: 700;
   letter-spacing: -0.03em;
   color: var(--text-primary);
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   margin-bottom: 8px;
 }
 
 .card-header p {
   color: var(--text-secondary);
   font-size: 1rem;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* ==========================================================================
@@ -344,7 +353,7 @@ body.subpage .tab-container:hover .tab-link {
   align-items: center;
   gap: 32px;
   padding-bottom: 32px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
   margin-bottom: 32px;
 }
 
@@ -371,26 +380,26 @@ body.subpage .tab-container:hover .tab-link {
 }
 
 .about-info h2 {
-  font-size: 1.75rem;
+  font-size: 1.8rem;
   font-weight: 700;
   color: var(--text-primary);
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   margin-bottom: 4px;
 }
 
 .about-handle {
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   color: var(--accent-blue);
   font-weight: 600;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
   margin-bottom: 12px;
 }
 
 .about-bio {
   color: var(--text-secondary);
-  font-size: 1rem;
-  line-height: 1.7;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  font-size: 1.02rem;
+  line-height: 1.75;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   word-break: keep-all;
 }
 
@@ -405,17 +414,17 @@ body.subpage .tab-container:hover .tab-link {
   background: rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-sub);
   padding: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .sub-section h3 {
-  font-size: 1.1rem;
+  font-size: 1.12rem;
   font-weight: 600;
   color: var(--text-primary);
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
   margin-bottom: 16px;
   display: flex;
   align-items: center;
@@ -430,21 +439,21 @@ body.subpage .tab-container:hover .tab-link {
 }
 
 .skill-tag {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-primary);
-  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 0.86rem;
   font-weight: 500;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   transition: var(--transition-smooth);
 }
 
 .skill-tag:hover {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-1px);
 }
 
@@ -460,9 +469,9 @@ body.subpage .tab-container:hover .tab-link {
   align-items: center;
   gap: 10px;
   color: var(--text-secondary);
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   text-decoration: none;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
