@@ -232,6 +232,7 @@ body.subpage .background-overlay {
 /* 우측 버전 전환 링크 (책자 버전) */
 .version-switch-link {
   pointer-events: auto;
+  margin-left: auto;
   display: inline-flex;
   align-items: center;
   gap: 6px;

@@ -174,22 +174,17 @@ async function navigateSmoothSpa(url, relativeHref, pushHistory = true) {
 
 function updateNavActiveState(href) {
   const cleanHref = href.split('/').pop().split('?')[0] || 'index.html';
-  
-  // 홈 버튼 갱신
-  const homeBtn = document.querySelector('.home-btn');
-  if (homeBtn) {
-    if (cleanHref === 'index.html' || cleanHref === '') {
-      homeBtn.classList.add('active');
-    } else {
-      homeBtn.classList.remove('active');
-    }
-  }
+  const isAboutTarget = (cleanHref === 'index.html' || cleanHref === '' || cleanHref === 'about.html');
 
   // 탭 링크들 갱신
   const tabLinks = document.querySelectorAll('.tab-link');
   tabLinks.forEach((link) => {
     const linkHref = (link.getAttribute('href') || '').split('/').pop();
-    if (linkHref === cleanHref) {
+    const isAboutLink = (linkHref === 'index.html' || linkHref === 'about.html');
+
+    if (isAboutTarget && isAboutLink) {
+      link.classList.add('active');
+    } else if (!isAboutTarget && linkHref === cleanHref) {
       link.classList.add('active');
     } else {
       link.classList.remove('active');
