@@ -1,35 +1,33 @@
 /* ==========================================================================
-   Apple iOS Liquid Glass Aesthetic Portfolio - Pure HTML / CSS / JS
+   Apple iOS Liquid Glass & Water Droplet Aesthetic - Pure HTML / CSS / JS
    ========================================================================== */
 
 :root {
   --font-main: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Pretendard", "Segoe UI", Roboto, sans-serif;
   --font-mono: "SF Mono", "Consolas", Menlo, monospace;
   
-  /* 아이폰 리퀴드 글라스 테마 (불투명 흰색을 배제하고 깊이감 있는 굴절/반사 유리 구현) */
-  --liquid-glass-bg: rgba(255, 255, 255, 0.12);
-  --liquid-glass-bg-hover: rgba(255, 255, 255, 0.22);
-  --liquid-glass-bg-active: rgba(255, 255, 255, 0.26);
-  --liquid-glass-border: rgba(255, 255, 255, 0.28);
-  --liquid-glass-border-bright: rgba(255, 255, 255, 0.55);
+  /* 초투명 워터/글라스 베이스 (화이트톤 배경색 배제) */
+  --droplet-bg: radial-gradient(circle at 50% 15%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.02) 80%);
+  --droplet-border-top: rgba(255, 255, 255, 0.75);
+  --droplet-border-bottom: rgba(255, 255, 255, 0.2);
+  --droplet-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.7),
+                    inset 0 -2px 4px rgba(0, 0, 0, 0.15),
+                    inset 0 0 6px rgba(255, 255, 255, 0.25),
+                    0 4px 12px rgba(0, 0, 0, 0.12);
+
+  --card-glass-bg: rgba(255, 255, 255, 0.1);
+  --card-glass-border: rgba(255, 255, 255, 0.24);
+  --card-glass-shadow: inset 0 1.5px 1px rgba(255, 255, 255, 0.5), 0 20px 40px -10px rgba(0, 0, 0, 0.22);
   
-  /* 애플 특유의 백드롭 블러 + 채도 부스팅 */
-  --liquid-blur: blur(28px) saturate(190%);
-  
-  /* 리퀴드 글라스 림 라이트 (상단 빛 반사 + 내부 광택) */
-  --liquid-specular: inset 0 1.5px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 1px rgba(0, 0, 0, 0.08);
-  --liquid-card-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.25), 0 8px 16px rgba(0, 0, 0, 0.1);
-  
-  /* 텍스트 컬러 (유리 위 가독성 확보) */
   --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.82);
+  --text-secondary: rgba(255, 255, 255, 0.85);
   --text-muted: rgba(255, 255, 255, 0.65);
   --accent-blue: #38bdf8;
   
   --radius-pill: 9999px;
   --radius-card: 26px;
   --radius-sub: 18px;
-  --transition-liquid: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * {
@@ -48,7 +46,7 @@ html, body {
 }
 
 /* ==========================================================================
-   Fullpage Background Image
+   Fullpage Background Image (호버 시 불투명/블러 효과 제거 -> 상시 선명 유지)
    ========================================================================== */
 .background-container {
   position: fixed;
@@ -67,15 +65,7 @@ html, body {
   object-position: center;
   filter: brightness(0.96) contrast(1.02);
   transform: scale(1.0);
-  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: filter, transform;
-}
-
-/* 탭 호버 시 배경 사진이 리퀴드 느낌으로 아웃포커스 */
-body:has(.tab-container:hover) .background-image,
-body.nav-hovered .background-image {
-  filter: brightness(0.72) blur(14px);
-  transform: scale(1.04);
+  /* 탭에 마우스를 올려도 사진이 흐려지지 않고 항상 맑고 선명하게 유지 */
 }
 
 .background-overlay {
@@ -83,14 +73,14 @@ body.nav-hovered .background-image {
   inset: 0;
   background: radial-gradient(
     circle at 50% 30%,
-    rgba(0, 0, 0, 0.05) 0%,
-    rgba(0, 0, 0, 0.3) 100%
+    rgba(0, 0, 0, 0.02) 0%,
+    rgba(0, 0, 0, 0.25) 100%
   );
   pointer-events: none;
 }
 
 /* ==========================================================================
-   Fixed Top Navigation (Liquid Glass Home & Tabs)
+   Fixed Top Navigation (Water Droplet Style Home & Tabs)
    ========================================================================== */
 .top-nav-bar {
   position: fixed;
@@ -105,23 +95,23 @@ body.nav-hovered .background-image {
   pointer-events: none;
 }
 
-/* 리퀴드 글라스 원형 홈 버튼 */
+/* 좌측 상단 물방울 홈 버튼 */
 .home-btn {
   pointer-events: auto;
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--liquid-glass-bg);
-  backdrop-filter: var(--liquid-blur);
-  -webkit-backdrop-filter: var(--liquid-blur);
-  border: 1px solid var(--liquid-glass-border);
-  box-shadow: var(--liquid-specular), 0 8px 24px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.6), inset 0 -1.5px 2px rgba(0, 0, 0, 0.15), 0 6px 18px rgba(0, 0, 0, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text-primary);
   cursor: pointer;
-  transition: var(--transition-liquid);
+  transition: var(--transition-smooth);
   text-decoration: none;
 }
 
@@ -129,15 +119,15 @@ body.nav-hovered .background-image {
   width: 20px;
   height: 20px;
   fill: currentColor;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
   transition: transform 0.25s ease;
 }
 
 .home-btn:hover {
-  background: var(--liquid-glass-bg-hover);
-  border-color: var(--liquid-glass-border-bright);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.5);
   transform: scale(1.06);
-  box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.8), 0 10px 28px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.8), 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .home-btn:active {
@@ -145,13 +135,15 @@ body.nav-hovered .background-image {
 }
 
 .home-btn.active {
-  background: var(--liquid-glass-bg-active);
-  border-color: var(--liquid-glass-border-bright);
-  box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.7), 0 4px 16px rgba(0, 0, 0, 0.15);
+  background: var(--droplet-bg);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-top-color: var(--droplet-border-top);
+  border-bottom-color: var(--droplet-border-bottom);
+  box-shadow: var(--droplet-shadow);
 }
 
 /* ==========================================================================
-   중앙 상단 3개 탭 (리퀴드 캡슐 네비게이션)
+   중앙 상단 3개 탭 (투명 물방울 캡슐)
    ========================================================================== */
 .tab-container {
   pointer-events: auto;
@@ -163,15 +155,15 @@ body.nav-hovered .background-image {
   gap: 5px;
   padding: 5px 6px;
   border-radius: var(--radius-pill);
-  background: var(--liquid-glass-bg);
-  backdrop-filter: var(--liquid-blur);
-  -webkit-backdrop-filter: var(--liquid-blur);
-  border: 1px solid var(--liquid-glass-border);
-  box-shadow: var(--liquid-specular), 0 12px 32px rgba(0, 0, 0, 0.18);
-  transition: var(--transition-liquid);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.45), inset 0 -1px 2px rgba(0, 0, 0, 0.1), 0 10px 28px rgba(0, 0, 0, 0.15);
+  transition: var(--transition-smooth);
 }
 
-/* 탭 링크 (흰색 배경 제거, 투명 크리스탈 캡슐로 변경) */
+/* 탭 링크 기본 */
 .tab-link {
   display: inline-flex;
   align-items: center;
@@ -187,34 +179,36 @@ body.nav-hovered .background-image {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   background: transparent;
   border: 1px solid transparent;
-  transition: var(--transition-liquid);
+  transition: var(--transition-smooth);
   white-space: nowrap;
   overflow: hidden;
 }
 
 .tab-link:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.09);
   border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* 
-   핵심 수정: 거슬리던 불투명 흰색을 완전히 없애고
-   주변 빛을 투과하는 리퀴드 렌즈 스타일의 하이라이트 적용
+   핵심 수정: 글자가 투명한 물방울 안에 맺혀 있는 듯한 맑은 표면장력 렌즈 효과
+   (화이트 톤 배경색 배제 + 빛 굴절 하이라이트 & 이너 섀도우)
 */
 .tab-link.active {
-  background: var(--liquid-glass-bg-active);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--liquid-glass-border-bright);
-  color: var(--text-primary);
+  background: var(--droplet-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-top-color: var(--droplet-border-top);
+  border-bottom-color: var(--droplet-border-bottom);
+  box-shadow: var(--droplet-shadow);
+  color: #ffffff;
   font-weight: 600;
-  box-shadow: inset 0 1.5px 1px rgba(255, 255, 255, 0.7), 0 4px 14px rgba(0, 0, 0, 0.15);
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 /* ==========================================================================
-   서브페이지 전용 1개 탭 축소 & 호버 시 확장 애니메이션
+   서브페이지 전용 1개 탭 축소 & 호버 시 옆으로 스르륵 확장
    ========================================================================== */
 body.subpage .tab-container:not(:hover) .tab-link:not(.active) {
   max-width: 0;
@@ -232,9 +226,9 @@ body.subpage .tab-container:not(:hover) .tab-link.active {
 }
 
 body.subpage .tab-container:hover {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: var(--liquid-glass-border-bright);
-  box-shadow: var(--liquid-specular), 0 16px 40px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.6), 0 14px 36px rgba(0, 0, 0, 0.2);
   gap: 6px;
   padding: 5px 8px;
 }
@@ -269,8 +263,7 @@ body.subpage .tab-container:hover .tab-link {
 }
 
 /* ==========================================================================
-   서브페이지 본문 카드 (아이폰 리퀴드 글라스 슬래브)
-   - 불투명 흰색 박스 느낌을 완전 제거하고 영롱한 투명 유리판 느낌 구현
+   서브페이지 본문 카드 (초투명 리퀴드 글라스 슬래브)
    ========================================================================== */
 .page-container {
   position: relative;
@@ -286,22 +279,15 @@ body.subpage .tab-container:hover .tab-link {
 .glass-card {
   width: 100%;
   max-width: 860px;
-  background: var(--liquid-glass-bg);
-  backdrop-filter: var(--liquid-blur);
-  -webkit-backdrop-filter: var(--liquid-blur);
-  border: 1px solid var(--liquid-glass-border);
+  background: var(--card-glass-bg);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid var(--card-glass-border);
   border-radius: var(--radius-card);
   padding: 44px;
-  box-shadow: var(--liquid-specular), var(--liquid-card-shadow);
+  box-shadow: var(--card-glass-shadow);
   animation: liquidFloatIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  transition: var(--transition-liquid);
-}
-
-/* 탭 호버 시 본문 카드의 은은한 뎁스 효과 */
-body:has(.tab-container:hover) .glass-card,
-body.nav-hovered .glass-card {
-  border-color: rgba(255, 255, 255, 0.38);
-  background: rgba(255, 255, 255, 0.16);
+  transition: var(--transition-smooth);
 }
 
 @keyframes liquidFloatIn {
@@ -336,7 +322,7 @@ body.nav-hovered .glass-card {
 }
 
 /* ==========================================================================
-   About Me Styles (Liquid Glass Profile)
+   About Me Styles
    ========================================================================== */
 .about-hero {
   display: flex;
@@ -351,7 +337,7 @@ body.nav-hovered .glass-card {
   width: 104px;
   height: 104px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.05));
   padding: 2px;
   flex-shrink: 0;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
@@ -361,10 +347,10 @@ body.nav-hovered .glass-card {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -401,13 +387,13 @@ body.nav-hovered .glass-card {
   gap: 24px;
 }
 
-/* 리퀴드 글라스 서브 박스 */
+/* 리퀴드 서브 박스 */
 .sub-section {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-sub);
   padding: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -423,7 +409,7 @@ body.nav-hovered .glass-card {
   gap: 8px;
 }
 
-/* 기술 스택 리퀴드 알약 태그 */
+/* 기술 스택 물방울 알약 태그 */
 .skill-tags {
   display: flex;
   flex-wrap: wrap;
@@ -431,21 +417,21 @@ body.nav-hovered .glass-card {
 }
 
 .skill-tag {
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.1);
   color: var(--text-primary);
   font-size: 0.85rem;
   font-weight: 500;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  transition: var(--transition-liquid);
+  transition: var(--transition-smooth);
 }
 
 .skill-tag:hover {
-  background: rgba(255, 255, 255, 0.24);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.45);
   transform: translateY(-1px);
 }
 
@@ -473,7 +459,7 @@ body.nav-hovered .glass-card {
 }
 
 /* ==========================================================================
-   Projects Styles (Liquid Glass Gallery)
+   Projects Styles
    ========================================================================== */
 .projects-grid {
   display: grid;
@@ -482,33 +468,33 @@ body.nav-hovered .glass-card {
 }
 
 .project-card {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: var(--radius-sub);
   overflow: hidden;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: var(--transition-liquid);
+  transition: var(--transition-smooth);
   display: flex;
   flex-direction: column;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: inset 0 1.5px 1px rgba(255, 255, 255, 0.6), 0 14px 28px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: inset 0 1.5px 1px rgba(255, 255, 255, 0.5), 0 14px 28px rgba(0, 0, 0, 0.2);
 }
 
 .project-visual {
   height: 130px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 2.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .project-body {
@@ -543,13 +529,13 @@ body.nav-hovered .glass-card {
 }
 
 .project-tag {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
   color: var(--text-secondary);
   font-size: 0.75rem;
   font-weight: 500;
   padding: 3px 8px;
   border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .project-link {
@@ -567,7 +553,7 @@ body.nav-hovered .glass-card {
 }
 
 /* ==========================================================================
-   Space Page Styles (Minimal Empty Glass)
+   Space Page Styles
    ========================================================================== */
 .space-container {
   text-align: center;
