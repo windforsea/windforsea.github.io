@@ -90,6 +90,12 @@ html, body {
   pointer-events: none;
 }
 
+.book-top-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .version-switch-btn {
   pointer-events: auto;
   display: inline-flex;
@@ -114,6 +120,12 @@ html, body {
   border-color: rgba(255, 255, 255, 0.45);
   transform: translateY(-2px);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+.version-switch-btn.btn-nebula:hover {
+  background: rgba(14, 165, 233, 0.3);
+  border-color: rgba(56, 189, 248, 0.6);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.45);
 }
 
 .page-counter-pill {
