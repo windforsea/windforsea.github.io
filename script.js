@@ -3,19 +3,23 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. 초기 로드 시 페이드 진입
-  document.body.classList.remove('page-leaving');
+  // 1. 초기 로드 시 조도 복원
+  document.body.classList.remove('page-dimmed');
 
   // 2. 탭 컨테이너 호버 감지
   initTabHover();
 
-  // 3. 탭 & 홈 전환 시 부드러운 전환 (알게 모르게 스르륵 바뀌는 효과)
+  // 3. 탭 & 홈 전환 시 부드러운 전환 (어두워졌다 밝아지는 감성적 노출 트랜지션)
   initSmoothTransitions();
+
+  // 4. 스페이스 갤러리 사진 팝업 모달
+  initPhotoModal();
 });
 
-// 뒤로가기/앞으로가기 시 페이지가 숨겨진 상태로 남지 않도록 복원
+// 뒤로가기/앞으로가기 시 페이지가 어두운 상태로 남지 않도록 복원
 window.addEventListener('pageshow', () => {
-  document.body.classList.remove('page-leaving');
+  document.body.classList.remove('page-dimmed');
+  initPhotoModal();
 });
 
 function initTabHover() {
@@ -63,10 +67,10 @@ function initSmoothTransitions() {
     const targetUrl = new URL(href, window.location.href).href;
 
     if (isHttp) {
-      // GitHub Pages / 웹서버 환경: 사진과 본문이 알게 모르게 스르륵 페이드되는 SPA 전환
+      // 웹 환경: 조도가 은은하게 어두워졌다가 새 풍경으로 밝아지는 시네마틱 전환
       navigateSmoothSpa(targetUrl, href);
     } else {
-      // 로컬 file:// 환경: 브라우저 깜빡임 없이 부드러운 페이드아웃 후 전환
+      // 로컬 file:// 환경: 화면이 꺼지지 않고 은은히 어두워진 뒤 전환
       navigateSmoothFallback(href);
     }
   });
@@ -78,17 +82,20 @@ function initSmoothTransitions() {
   }
 }
 
-// 로컬 환경을 위한 부드러운 페이드아웃 전환
+// 로컬 환경을 위한 은은한 조도(밝기) 전환
 function navigateSmoothFallback(href) {
-  document.body.classList.add('page-leaving');
+  document.body.classList.add('page-dimmed');
   setTimeout(() => {
     window.location.href = href;
-  }, 350);
+  }, 260);
 }
 
-// 웹서버/GitHub Pages 환경을 위한 알게 모르게 바뀌는 시네마틱 크로스페이드
+// 웹서버/GitHub Pages 환경을 위한 어두워졌다 밝아지는 시네마틱 크로스페이드
 async function navigateSmoothSpa(url, relativeHref, pushHistory = true) {
   try {
+    // 1. 조도를 먼저 차분하게 낮춤 (화면이 꺼지지 않고 은은하게 어두워짐)
+    document.body.classList.add('page-dimmed');
+
     const response = await fetch(url);
     if (!response.ok) throw new Error('Fetch failed');
     const htmlText = await response.text();
@@ -96,28 +103,17 @@ async function navigateSmoothSpa(url, relativeHref, pushHistory = true) {
     const parser = new DOMParser();
     const newDoc = parser.parseFromString(htmlText, 'text/html');
 
-    // 1. 배경 이미지 부드러운 크로스 페이드
-    const currentBgImg = document.querySelector('.background-image');
     const newBgImg = newDoc.querySelector('.background-image');
-    if (currentBgImg && newBgImg && currentBgImg.getAttribute('src') !== newBgImg.getAttribute('src')) {
-      currentBgImg.style.opacity = '0';
-      setTimeout(() => {
-        currentBgImg.src = newBgImg.getAttribute('src');
-        currentBgImg.alt = newBgImg.alt || '';
-        currentBgImg.style.opacity = '1';
-      }, 400);
-    }
-
-    // 2. 메인 본문 카드 부드러운 전환
-    const currentPageContainer = document.querySelector('.page-container');
-    const newPageContainer = newDoc.querySelector('.page-container');
-
-    if (currentPageContainer) {
-      currentPageContainer.style.opacity = '0';
-      currentPageContainer.style.transform = 'translateY(10px)';
-    }
+    const newSrc = newBgImg ? newBgImg.getAttribute('src') : null;
 
     setTimeout(() => {
+      // 2. 어두워진 상태에서 배경 이미지 및 본문 자연스럽게 교체
+      const currentBgImg = document.querySelector('.background-image');
+      if (currentBgImg && newSrc && currentBgImg.getAttribute('src') !== newSrc) {
+        currentBgImg.src = newSrc;
+        currentBgImg.alt = newBgImg.alt || '';
+      }
+
       // 서브페이지 여부 업데이트
       const isNewSubpage = newDoc.body.classList.contains('subpage');
       if (isNewSubpage) {
@@ -127,20 +123,19 @@ async function navigateSmoothSpa(url, relativeHref, pushHistory = true) {
       }
 
       // 본문 교체
+      const currentPageContainer = document.querySelector('.page-container');
+      const newPageContainer = newDoc.querySelector('.page-container');
+
       if (newPageContainer) {
         if (currentPageContainer) {
           currentPageContainer.innerHTML = newPageContainer.innerHTML;
-          currentPageContainer.style.opacity = '1';
-          currentPageContainer.style.transform = 'translateY(0)';
         } else {
-          // 홈에서 서브페이지로 전환 시
           const header = document.querySelector('.top-nav-bar');
           if (header) {
             header.insertAdjacentElement('afterend', newPageContainer.cloneNode(true));
           }
         }
       } else if (currentPageContainer) {
-        // 서브페이지에서 홈으로 전환 시 본문 제거
         currentPageContainer.remove();
       }
 
@@ -154,15 +149,22 @@ async function navigateSmoothSpa(url, relativeHref, pushHistory = true) {
         currentWatermarkLoc.textContent = newWatermarkLoc.textContent;
       }
 
-      // 5. 타이틀 갱신 및 히스토리 푸시
+      // 5. 갤러리 모달 이벤트 바인딩
+      initPhotoModal();
+
+      // 6. 타이틀 갱신 및 히스토리 푸시
       document.title = newDoc.title;
       if (pushHistory) {
         history.pushState({ url }, '', url);
       }
-    }, 320);
+
+      // 7. 조도를 서서히 정상으로 복원 (새로운 풍경으로 밝아짐)
+      setTimeout(() => {
+        document.body.classList.remove('page-dimmed');
+      }, 50);
+    }, 240);
 
   } catch (err) {
-    // 네트워크 오류 또는 file:// 보안 정책 시 fallback 실행
     navigateSmoothFallback(relativeHref);
   }
 }
@@ -190,4 +192,81 @@ function updateNavActiveState(href) {
       link.classList.remove('active');
     }
   });
+}
+
+// 스페이스 갤러리 사진 팝업 모달
+function initPhotoModal() {
+  const photoCards = document.querySelectorAll('.photo-card');
+  if (!photoCards.length) return;
+
+  const modal = getOrCreatePhotoModal();
+  const modalImg = document.getElementById('modalImg');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc = document.getElementById('modalDesc');
+
+  function openModal(src, title, desc) {
+    if (modalImg) {
+      modalImg.src = src;
+      modalImg.alt = title;
+    }
+    if (modalTitle) modalTitle.textContent = title;
+    if (modalDesc) modalDesc.textContent = desc;
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  photoCards.forEach((card) => {
+    card.onclick = () => {
+      const src = card.dataset.src;
+      const title = card.dataset.title || '';
+      const desc = card.dataset.desc || '';
+      openModal(src, title, desc);
+    };
+  });
+}
+
+function getOrCreatePhotoModal() {
+  let modal = document.getElementById('photoModal');
+  if (modal) return modal;
+
+  modal = document.createElement('div');
+  modal.className = 'photo-modal';
+  modal.id = 'photoModal';
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+  modal.setAttribute('aria-hidden', 'true');
+  modal.innerHTML = `
+    <div class="photo-modal-backdrop"></div>
+    <div class="photo-modal-content">
+      <button type="button" class="modal-close-btn" aria-label="닫기">✕</button>
+      <div class="modal-img-container">
+        <img src="" alt="" class="modal-img" id="modalImg" />
+      </div>
+      <div class="modal-caption">
+        <h4 id="modalTitle"></h4>
+        <p id="modalDesc"></p>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  function closeModal() {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  const closeBtn = modal.querySelector('.modal-close-btn');
+  const backdrop = modal.querySelector('.photo-modal-backdrop');
+  if (closeBtn) closeBtn.onclick = closeModal;
+  if (backdrop) backdrop.onclick = closeModal;
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  return modal;
 }
