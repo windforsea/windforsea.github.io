@@ -143,7 +143,7 @@ html, body {
 }
 
 /* ==========================================================================
-   중앙 상단 3개 탭 (투명 물방울 캡슐)
+   중앙 상단 3개 탭 (본문 카드와 동일한 글래스 카드 형태)
    ========================================================================== */
 .tab-container {
   pointer-events: auto;
@@ -152,24 +152,24 @@ html, body {
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 5px 6px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.45), inset 0 -1px 2px rgba(0, 0, 0, 0.1), 0 10px 28px rgba(0, 0, 0, 0.15);
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: var(--radius-sub);
+  background: var(--card-glass-bg);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid var(--card-glass-border);
+  box-shadow: var(--card-glass-shadow);
   transition: var(--transition-smooth);
 }
 
-/* 탭 링크 기본 */
+/* 탭 링크 기본 (카드 모서리 비율에 맞춘 둥근 스퀘어) */
 .tab-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 20px;
-  border-radius: var(--radius-pill);
+  padding: 8px 18px;
+  border-radius: 12px;
   font-family: var(--font-main);
   font-size: 0.92rem;
   font-weight: 500;
@@ -186,13 +186,12 @@ html, body {
 
 .tab-link:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 /* 
-   핵심 수정: 글자가 투명한 물방울 안에 맺혀 있는 듯한 맑은 표면장력 렌즈 효과
-   (화이트 톤 배경색 배제 + 빛 굴절 하이라이트 & 이너 섀도우)
+   선택된 탭: 투명 물방울 표면장력 효과 유지
 */
 .tab-link.active {
   background: var(--droplet-bg);
@@ -226,11 +225,11 @@ body.subpage .tab-container:not(:hover) .tab-link.active {
 }
 
 body.subpage .tab-container:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.6), 0 14px 36px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.38);
+  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.6), 0 16px 36px rgba(0, 0, 0, 0.22);
   gap: 6px;
-  padding: 5px 8px;
+  padding: 6px 8px;
 }
 
 body.subpage .tab-container:hover .tab-link {
