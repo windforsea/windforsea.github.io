@@ -1,10 +1,15 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
 /* ==========================================================================
    Apple iOS Liquid Glass & Water Droplet Aesthetic - Pure HTML / CSS / JS
    ========================================================================== */
 
 :root {
-  --font-main: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Pretendard", "Segoe UI", Roboto, sans-serif;
-  --font-mono: "SF Mono", "Consolas", Menlo, monospace;
+  --font-main: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Pretendard", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Pretendard", -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Consolas", Menlo, monospace;
   
   /* 초투명 워터/글라스 베이스 (화이트톤 배경색 배제) */
   --droplet-bg: radial-gradient(circle at 50% 15%, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.02) 80%);
@@ -29,6 +34,28 @@
   --radius-card: 26px;
   --radius-sub: 18px;
   --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: all 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: 0.45s cubic-bezier(0.16, 1, 0.3, 1) both fade-out;
+}
+::view-transition-new(root) {
+  animation: 0.55s cubic-bezier(0.16, 1, 0.3, 1) both fade-in;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 * {
@@ -40,10 +67,17 @@
 html, body {
   width: 100%;
   min-height: 100%;
-  font-family: var(--font-main);
+  font-family: var(--font-body);
   background-color: #0c1222;
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
+  opacity: 1;
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), filter 0.45s ease;
+}
+
+body.page-leaving {
+  opacity: 0;
+  filter: blur(3px);
 }
 
 /* ==========================================================================
@@ -60,13 +94,16 @@ html, body {
 }
 
 .background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   filter: brightness(0.96) contrast(1.02);
   transform: scale(1.0);
-  /* 탭에 마우스를 올려도 사진이 흐려지지 않고 항상 맑고 선명하게 유지 */
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .background-overlay {
@@ -179,10 +216,10 @@ body.subpage .background-overlay {
   justify-content: center;
   padding: 8px 18px;
   border-radius: 12px;
-  font-family: var(--font-main);
+  font-family: var(--font-body);
   font-size: 0.92rem;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   color: var(--text-secondary);
   text-decoration: none;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
@@ -265,7 +302,7 @@ body.subpage .tab-container:hover .tab-link {
 }
 
 .watermark-location {
-  font-family: var(--font-main);
+  font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 500;
   letter-spacing: -0.01em;
@@ -276,7 +313,7 @@ body.subpage .tab-container:hover .tab-link {
 .watermark-credit {
   font-family: var(--font-mono);
   font-size: 0.74rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.78);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.65);
@@ -298,6 +335,7 @@ body.subpage .tab-container:hover .tab-link {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .glass-card {
@@ -331,7 +369,8 @@ body.subpage .tab-container:hover .tab-link {
 }
 
 .card-header h1 {
-  font-size: 2.2rem;
+  font-family: var(--font-display);
+  font-size: 2.3rem;
   font-weight: 700;
   letter-spacing: -0.03em;
   color: var(--text-primary);
@@ -380,25 +419,31 @@ body.subpage .tab-container:hover .tab-link {
 }
 
 .about-info h2 {
-  font-size: 1.8rem;
+  font-family: var(--font-display);
+  font-size: 1.85rem;
   font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   margin-bottom: 4px;
 }
 
 .about-handle {
-  font-size: 0.98rem;
+  font-family: var(--font-mono);
+  font-size: 0.96rem;
   color: var(--accent-blue);
   font-weight: 600;
+  letter-spacing: 0.01em;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
   margin-bottom: 12px;
 }
 
 .about-bio {
+  font-family: var(--font-body);
   color: var(--text-secondary);
   font-size: 1.02rem;
   line-height: 1.75;
+  letter-spacing: -0.01em;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   word-break: keep-all;
 }
@@ -421,8 +466,10 @@ body.subpage .tab-container:hover .tab-link {
 }
 
 .sub-section h3 {
+  font-family: var(--font-display), var(--font-body);
   font-size: 1.12rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--text-primary);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
   margin-bottom: 16px;
@@ -439,10 +486,12 @@ body.subpage .tab-container:hover .tab-link {
 }
 
 .skill-tag {
+  font-family: var(--font-mono), var(--font-body);
   background: rgba(255, 255, 255, 0.12);
   color: #ffffff;
-  font-size: 0.86rem;
+  font-size: 0.82rem;
   font-weight: 500;
+  letter-spacing: 0.01em;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
   border: 1px solid rgba(255, 255, 255, 0.25);
@@ -468,6 +517,7 @@ body.subpage .tab-container:hover .tab-link {
   display: flex;
   align-items: center;
   gap: 10px;
+  font-family: var(--font-body);
   color: var(--text-secondary);
   font-size: 0.95rem;
   text-decoration: none;
@@ -527,17 +577,21 @@ body.subpage .tab-container:hover .tab-link {
 }
 
 .project-body h3 {
-  font-size: 1.15rem;
-  font-weight: 600;
+  font-family: var(--font-display), var(--font-body);
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   margin-bottom: 8px;
 }
 
 .project-body p {
-  font-size: 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   margin-bottom: 16px;
   flex: 1;
@@ -551,27 +605,34 @@ body.subpage .tab-container:hover .tab-link {
 }
 
 .project-tag {
+  font-family: var(--font-mono);
   background: rgba(255, 255, 255, 0.08);
   color: var(--text-secondary);
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   font-weight: 500;
+  letter-spacing: 0.02em;
   padding: 3px 8px;
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .project-link {
+  font-family: var(--font-display), var(--font-body);
   font-size: 0.88rem;
   font-weight: 600;
+  letter-spacing: 0.02em;
   color: var(--accent-blue);
   text-decoration: none;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  transition: color 0.2s ease;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .project-link:hover {
   color: #ffffff;
-  text-decoration: underline;
+  transform: translateX(4px);
 }
 
 /* ==========================================================================
@@ -589,17 +650,21 @@ body.subpage .tab-container:hover .tab-link {
 }
 
 .space-title {
-  font-size: 1.5rem;
+  font-family: var(--font-display), var(--font-body);
+  font-size: 1.6rem;
   font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
   margin-bottom: 10px;
 }
 
 .space-desc {
+  font-family: var(--font-body);
   color: var(--text-secondary);
-  font-size: 1rem;
-  line-height: 1.7;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  letter-spacing: -0.01em;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
