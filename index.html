@@ -3,98 +3,349 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>windforsea | Portfolio</title>
+  <title>windforsea | Portfolio Journal</title>
+  <!-- Google Fonts & Pretendard CDN -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="book.css" />
 </head>
-<body class="subpage">
+<body>
 
-  <!-- 블루 사파이어 & 스카이 블루 리퀴드 글래스 앰비언트 배경 -->
-  <div class="background-container" aria-hidden="true">
-    <div class="sapphire-orb sapphire-orb-1"></div>
-    <div class="sapphire-orb sapphire-orb-2"></div>
-    <div class="sapphire-orb sapphire-orb-3"></div>
-    <div class="background-overlay"></div>
+  <!-- 전체 화면 배경 (은은한 블러) -->
+  <div class="book-bg-container">
+    <img src="assets/sledo.jpg" alt="울산 대왕암 배경" class="book-bg-img" />
+    <div class="book-bg-overlay"></div>
   </div>
 
-  <!-- 최상단 내비게이션 바 (홈버튼 삭제, 중앙 3개 탭 & 우측 책자 전환 링크) -->
-  <header class="top-nav-bar">
-    <!-- 중앙 상단 3개 탭 (시작 페이지: 자기소개 활성화) -->
-    <nav class="tab-container" role="navigation" aria-label="메인 메뉴">
-      <a href="index.html" class="tab-link active">자기소개</a>
-      <a href="projects.html" class="tab-link">프로젝트</a>
-      <a href="space.html" class="tab-link">스페이스</a>
-    </nav>
-
-    <!-- 우측 책자 전환 링크 -->
-    <a href="book.html" class="version-switch-link" title="책자보기">
-      <span>📖</span>
-      <span class="btn-text">책자보기</span>
+  <!-- 상단 내비게이션 바 (간략보기 전환 링크 & 페이지 카운터) -->
+  <header class="book-top-bar">
+    <a href="about.html" class="version-switch-btn" title="간략보기로 이동">
+      <span>🫧</span>
+      <span>간략보기</span>
     </a>
+    <div class="page-counter-pill" id="pageCounterPill">Cover • 표지</div>
   </header>
 
-  <!-- 메인 자기소개 글래스 카드 -->
-  <main class="page-container">
-    <section class="glass-card">
-      <div class="about-hero">
-        <div class="about-avatar">
-          <img src="assets/profile-cat.jpg" alt="Skalen Seo 프로필 사진" class="about-avatar-img" />
-        </div>
-        <div class="about-info">
-          <h2>Skalen Seo</h2>
-          <p class="about-handle">@windforsea</p>
-          <p class="about-bio">
-            AI를 활용한 코딩 및 프로젝트 중심의 개발자 입니다.<br />
-            미니멀 하며 간결한 방식을 좋아합니다.
-          </p>
-        </div>
-      </div>
+  <!-- 책자(Booklet) 메인 래퍼 -->
+  <div class="book-wrapper">
+    
+    <!-- 상단 3개 책갈피 탭 (가로 배치 & 위로 쏙 뽑아올림 인터랙션) -->
+    <nav class="bookmarks-nav" aria-label="책갈피 내비게이션">
+      <div class="bookmarks-stack" id="bookmarksStack">
+        <!-- 책갈피 1: 자기소개 (Page 1) -->
+        <button type="button" class="bookmark-ribbon ribbon-about" data-page="1" title="자기소개 챕터로 이동">
+          <span class="ribbon-text">자기소개</span>
+        </button>
 
-      <div class="about-grid">
-        <!-- 보유 기술 스택 -->
-        <div class="sub-section">
-          <h3>🛠️ Skills & Tools</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">AI코딩</span>
-            <span class="skill-tag">python</span>
-            <span class="skill-tag">데이터분석</span>
-            <span class="skill-tag">머신러닝</span>
-            <span class="skill-tag">Git / GitHub</span>  
-            <span class="skill-tag">LLM</span>
-            <span class="skill-tag">AI agent</span>          
+        <!-- 책갈피 2: 프로젝트 (Page 2 - 2개 페이지로 구성) -->
+        <button type="button" class="bookmark-ribbon ribbon-projects" data-page="2" title="프로젝트 챕터로 이동">
+          <span class="ribbon-text">프로젝트</span>
+        </button>
+
+        <!-- 책갈피 3: 스페이스 (Page 4) -->
+        <button type="button" class="bookmark-ribbon ribbon-space" data-page="4" title="스페이스 챕터로 이동">
+          <span class="ribbon-text">스페이스</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- 책자 본체 (3D perspective container) -->
+    <main class="book-spine-container" id="bookContainer">
+      <div class="book-shadow-base"></div>
+
+      <div class="book" id="book">
+        
+        <!-- ================= PAGE 0: 표지 (Cover) ================= -->
+        <article class="book-page page-cover active" data-index="0">
+          <div class="page-inner cover-inner">
+            <div class="cover-decorative-line"></div>
+            <div class="cover-badge">PORTFOLIO JOURNAL</div>
+            <h1 class="cover-title">windforsea</h1>
+            <p class="cover-subtitle">A Minimal & Thoughtful Space<br />Crafted with AI and Code</p>
+            
+            <div class="cover-meta-box">
+              <span class="meta-author">Written by <strong>Skalen Seo</strong></span>
+              <span class="meta-edition">Vol. 2026 Edition</span>
+            </div>
+
+            <button type="button" class="open-book-btn" id="openBookBtn">
+              <span>책장 열기</span>
+              <span class="btn-arrow">→</span>
+            </button>
+
+            <div class="cover-corner-hint">상단 책갈피는 챕터 바로가기 • 좌우 화살표(← / →)로 세부 페이지 넘기기 📖</div>
           </div>
-        </div>
+        </article>
 
-        <!-- 연락처 & 소셜 링크 -->
-        <div class="sub-section">
-          <h3>📫 Connect (click)</h3>
-          <ul class="contact-list">
-            <li>
-              <a href="https://github.com/windforsea" target="_blank" rel="noopener noreferrer" class="contact-item">
-                <span>🐙</span>
-                <span>GitHub</span>
-              </a>
-            </li>
-            <li>
-              <a href="mailto:windforsea@gmail.com" class="contact-item">
-                <span>✉️</span>
-                <span>Email : windforsea@gmail.com</span>
-              </a>
-            </li>
-          </ul>
-        </div>
+        <!-- ================= PAGE 1: 자기소개 (Chapter 1) ================= -->
+        <article class="book-page page-about" data-index="1">
+          <div class="page-inner">
+            <header class="chapter-header">
+              <span class="chapter-num">CHAPTER 01</span>
+              <h2 class="chapter-title">About Me</h2>
+            </header>
+
+            <div class="about-book-hero">
+              <div class="about-book-avatar">
+                <img src="assets/profile-cat.jpg" alt="Skalen Seo 프로필" class="avatar-img" />
+              </div>
+              <div class="about-book-info">
+                <h3>Skalen Seo</h3>
+                <span class="book-handle">@windforsea</span>
+                <p class="book-bio">
+                  AI를 활용한 코딩 및 프로젝트 중심의 개발자 입니다.<br />
+                  미니멀 하며 간결한 방식을 좋아합니다.
+                </p>
+              </div>
+            </div>
+
+            <div class="book-section-divider"></div>
+
+            <div class="about-book-grid">
+              <!-- 기술 스택 -->
+              <div class="book-subbox">
+                <h4>🛠️ Skills & Tools</h4>
+                <div class="book-tags">
+                  <span class="book-tag">AI코딩</span>
+                  <span class="book-tag">python</span>
+                  <span class="book-tag">데이터분석</span>
+                  <span class="book-tag">머신러닝</span>
+                  <span class="book-tag">Git / GitHub</span>
+                  <span class="book-tag">LLM</span>
+                  <span class="book-tag">AI agent</span>
+                </div>
+              </div>
+
+              <!-- 연락처 & 소셜 -->
+              <div class="book-subbox">
+                <h4>📫 Connect</h4>
+                <div class="book-contact-links">
+                  <a href="https://github.com/windforsea" target="_blank" rel="noopener noreferrer" class="book-contact-item">
+                    <span>🐙</span>
+                    <span>github.com/windforsea</span>
+                  </a>
+                  <a href="mailto:windforsea@gmail.com" class="book-contact-item">
+                    <span>✉️</span>
+                    <span>windforsea@gmail.com</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="page-number-footer">01 • About</div>
+          </div>
+        </article>
+
+        <!-- ================= PAGE 2: 프로젝트 1페이지 (Chapter 2 Part 1) ================= -->
+        <article class="book-page page-projects page-projects-1" data-index="2">
+          <div class="page-inner">
+            <header class="chapter-header">
+              <div class="chapter-meta-line">
+                <span class="chapter-num">CHAPTER 02 • PART 1</span>
+                <span class="chapter-paging-hint">다음 프로젝트는 화살표(❯)로 넘겨보세요</span>
+              </div>
+              <h2 class="chapter-title">Featured Projects</h2>
+            </header>
+
+            <div class="projects-book-list">
+              <!-- 프로젝트 1 -->
+              <div class="book-project-card">
+                <div class="bp-icon">📷</div>
+                <div class="bp-content">
+                  <div class="bp-header">
+                    <h4>인스타 감성 웹 포트폴리오</h4>
+                    <div class="bp-tags">
+                      <span class="bp-tag">HTML5</span>
+                      <span class="bp-tag">CSS3</span>
+                      <span class="bp-tag">GitHub Pages</span>
+                    </div>
+                  </div>
+                  <p>풀스크린 고화질 사진과 투명 리퀴드 글라스 테마로 시각적 피로를 줄인 감성 포트폴리오 웹사이트입니다.</p>
+                  <a href="about.html" class="bp-link">간략보기 →</a>
+                </div>
+              </div>
+
+              <!-- 프로젝트 2 -->
+              <div class="book-project-card">
+                <div class="bp-icon">🤖</div>
+                <div class="bp-content">
+                  <div class="bp-header">
+                    <h4>AI 코딩 & 데이터 분석 공간</h4>
+                    <div class="bp-tags">
+                      <span class="bp-tag">Python</span>
+                      <span class="bp-tag">Machine Learning</span>
+                      <span class="bp-tag">LLM</span>
+                    </div>
+                  </div>
+                  <p>AI 에이전트와 LLM을 결합하여 복잡한 데이터 분석 및 자동화 워크플로우를 구축하는 프로젝트 저장소입니다.</p>
+                  <a href="https://github.com/windforsea" target="_blank" rel="noopener noreferrer" class="bp-link">GitHub 레포지토리 →</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="page-number-footer">02 • Projects (1/2)</div>
+          </div>
+        </article>
+
+        <!-- ================= PAGE 3: 프로젝트 2페이지 (Chapter 2 Part 2) ================= -->
+        <article class="book-page page-projects page-projects-2" data-index="3">
+          <div class="page-inner">
+            <header class="chapter-header">
+              <div class="chapter-meta-line">
+                <span class="chapter-num">CHAPTER 02 • PART 2</span>
+                <span class="chapter-paging-hint">❮ 이전 프로젝트 / 스페이스 ❯</span>
+              </div>
+              <h2 class="chapter-title">Ongoing & Lab Works</h2>
+            </header>
+
+            <div class="projects-book-list">
+              <!-- 프로젝트 3 -->
+              <div class="book-project-card">
+                <div class="bp-icon">📖</div>
+                <div class="bp-content">
+                  <div class="bp-header">
+                    <h4>인터랙티브 3D 북클릿 저널</h4>
+                    <div class="bp-tags">
+                      <span class="bp-tag">HTML5</span>
+                      <span class="bp-tag">3D CSS</span>
+                      <span class="bp-tag">JavaScript</span>
+                    </div>
+                  </div>
+                  <p>종이 책장의 질감과 슬라이드 넘김, 입체 책갈피 탭을 브라우저에 사실적으로 구현한 디지털 저널 에디션입니다.</p>
+                  <span class="bp-badge-curr">현재 열람 중인 에디션</span>
+                </div>
+              </div>
+
+              <!-- 프로젝트 4 -->
+              <div class="book-project-card">
+                <div class="bp-icon">💎</div>
+                <div class="bp-content">
+                  <div class="bp-header">
+                    <h4>블루 사파이어 리퀴드 글래스 UI</h4>
+                    <div class="bp-tags">
+                      <span class="bp-tag">Glassmorphism</span>
+                      <span class="bp-tag">Liquid Glass</span>
+                      <span class="bp-tag">iOS Droplet</span>
+                    </div>
+                  </div>
+                  <p>빛 굴절과 앰비언트 라이트 오브, 애플 비전 스타일의 물방울 버튼을 결합한 럭셔리 블루 사파이어 테마입니다.</p>
+                  <a href="about.html" class="bp-link">간략보기 바로가기 →</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="page-number-footer">02 • Projects (2/2)</div>
+          </div>
+        </article>
+
+        <!-- ================= PAGE 4: 스페이스 (Chapter 3) ================= -->
+        <article class="book-page page-space" data-index="4">
+          <div class="page-inner">
+            <header class="chapter-header">
+              <span class="chapter-num">CHAPTER 03</span>
+              <h2 class="chapter-title">Space & Archives</h2>
+            </header>
+
+            <!-- 원본 유지 문구 -->
+            <div class="space-book-desc-box">
+              <div class="space-plant-icon">🌱</div>
+              <h3 class="space-lead-title">비어있는 공간</h3>
+              <p class="space-lead-desc">
+                새로운 아이디어와 기록을 위해 남겨둔 여백입니다.<br />
+                블로그 글, 사진 모음, 또는 뭔가 새로운 시도가 될지도?.
+              </p>
+            </div>
+
+            <!-- 배경 사진 아카이브 갤러리 -->
+            <div class="book-gallery-section">
+              <h4 class="book-gallery-heading">📷 Photo Archives (Click to view)</h4>
+              
+              <div class="book-gallery-grid">
+                <!-- 1: 대왕암 -->
+                <div class="b-photo-card" data-src="assets/sledo.jpg" data-title="울산광역시 대왕암" data-desc="울산광역시 동구 일산동 • 기암괴석과 푸른 동해 바다">
+                  <div class="b-thumb-wrap">
+                    <img src="assets/sledo.jpg" alt="울산 대왕암" class="b-thumb" loading="lazy" />
+                  </div>
+                  <div class="b-photo-info">
+                    <span class="b-photo-name">울산 대왕암</span>
+                    <span class="b-photo-sub">Daewangam</span>
+                  </div>
+                </div>
+
+                <!-- 2: 선암호수공원 봄 -->
+                <div class="b-photo-card" data-src="assets/sunam1.jpg" data-title="선암호수공원 (봄)" data-desc="울산광역시 남구 선암동 • 호수 산책로와 숲의 정취">
+                  <div class="b-thumb-wrap">
+                    <img src="assets/sunam1.jpg" alt="선암호수공원 봄" class="b-thumb" loading="lazy" />
+                  </div>
+                  <div class="b-photo-info">
+                    <span class="b-photo-name">선암호수공원 (봄)</span>
+                    <span class="b-photo-sub">Seonam Lake</span>
+                  </div>
+                </div>
+
+                <!-- 3: 선암호수공원 산책로 -->
+                <div class="b-photo-card" data-src="assets/sunam2.jpg" data-title="선암호수공원 (산책로)" data-desc="울산광역시 남구 선암동 • 잔잔한 호수 수변 데크길">
+                  <div class="b-thumb-wrap">
+                    <img src="assets/sunam2.jpg" alt="선암호수공원 산책로" class="b-thumb" loading="lazy" />
+                  </div>
+                  <div class="b-photo-info">
+                    <span class="b-photo-name">선암호수공원 (산책로)</span>
+                    <span class="b-photo-sub">Promenade</span>
+                  </div>
+                </div>
+
+                <!-- 4: 슬도 -->
+                <div class="b-photo-card" data-src="assets/sledo2.jpg" data-title="울산광역시 슬도" data-desc="울산광역시 동구 방어동 • 슬도 등대와 시원한 파도 소리">
+                  <div class="b-thumb-wrap">
+                    <img src="assets/sledo2.jpg" alt="울산 슬도" class="b-thumb" loading="lazy" />
+                  </div>
+                  <div class="b-photo-info">
+                    <span class="b-photo-name">울산 슬도</span>
+                    <span class="b-photo-sub">Seuldo</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="page-number-footer">03 • Space</div>
+          </div>
+        </article>
+
       </div>
-    </section>
-  </main>
+    </main>
 
-  <!-- 우측 하단 미니멀 워터마크 -->
-  <div class="watermark">
-    <span class="watermark-credit">@windforsea</span>
+    <!-- 좌/우 넘김 플로팅 컨트롤 버튼 (우에서 좌로 넘기기) -->
+    <button type="button" class="nav-arrow-btn btn-prev" id="btnPrev" aria-label="이전 페이지">❮</button>
+    <button type="button" class="nav-arrow-btn btn-next" id="btnNext" aria-label="다음 페이지">❯</button>
+
   </div>
 
-  <script src="script.js"></script>
+  <!-- 하단 페이지 도트 인디케이터 (총 5개 페이지) -->
+  <div class="book-dots" id="bookDots">
+    <button type="button" class="dot active" data-index="0" aria-label="표지"></button>
+    <button type="button" class="dot" data-index="1" aria-label="자기소개"></button>
+    <button type="button" class="dot" data-index="2" aria-label="프로젝트 1"></button>
+    <button type="button" class="dot" data-index="3" aria-label="프로젝트 2"></button>
+    <button type="button" class="dot" data-index="4" aria-label="스페이스"></button>
+  </div>
+
+  <!-- 컴팩트 사진 모달 팝업 (너무 크게 확대되지 않음) -->
+  <div class="photo-modal" id="photoModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="photo-modal-backdrop"></div>
+    <div class="photo-modal-content">
+      <button type="button" class="modal-close-btn" aria-label="닫기">✕</button>
+      <div class="modal-img-container">
+        <img src="" alt="" class="modal-img" id="modalImg" />
+      </div>
+      <div class="modal-caption">
+        <h4 id="modalTitle"></h4>
+        <p id="modalDesc"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="book.js"></script>
 </body>
 </html>

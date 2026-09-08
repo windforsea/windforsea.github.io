@@ -87,10 +87,13 @@ function initSmoothTransitions() {
     const href = link.getAttribute('href');
     if (!href) return;
 
-    // 외부 링크, 새 창, 앵커, mailto, 책자 버전 등은 기본 브라우저 내비게이션 유지
+    // 외부 링크, 새 창, 앵커, mailto, 책자보기 전환 링크 등은 기본 브라우저 내비게이션 유지
     if (
       link.target === '_blank' ||
+      link.classList.contains('version-switch-link') ||
       href.includes('book.html') ||
+      href.includes('index.html') ||
+      href === '/' ||
       href.startsWith('http://') ||
       href.startsWith('https://') ||
       href.startsWith('mailto:') ||
@@ -215,18 +218,13 @@ async function navigateSmoothSpa(url, relativeHref, pushHistory = true) {
 }
 
 function updateNavActiveState(href) {
-  const cleanHref = href.split('/').pop().split('?')[0] || 'index.html';
-  const isAboutTarget = (cleanHref === 'index.html' || cleanHref === '' || cleanHref === 'about.html');
+  const cleanHref = href.split('/').pop().split('?')[0] || 'about.html';
 
   // 탭 링크들 갱신
   const tabLinks = document.querySelectorAll('.tab-link');
   tabLinks.forEach((link) => {
     const linkHref = (link.getAttribute('href') || '').split('/').pop();
-    const isAboutLink = (linkHref === 'index.html' || linkHref === 'about.html');
-
-    if (isAboutTarget && isAboutLink) {
-      link.classList.add('active');
-    } else if (!isAboutTarget && linkHref === cleanHref) {
+    if (linkHref === cleanHref) {
       link.classList.add('active');
     } else {
       link.classList.remove('active');
