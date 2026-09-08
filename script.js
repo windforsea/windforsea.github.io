@@ -26,13 +26,55 @@ function initTabHover() {
   const tabContainer = document.querySelector('.tab-container');
   if (!tabContainer) return;
 
+  // 1. 조작 유도 툴팁 요소 동적 생성 (아직 없는 경우)
+  let tooltip = tabContainer.querySelector('.tab-hover-tooltip');
+  if (!tooltip) {
+    tooltip = document.createElement('div');
+    tooltip.className = 'tab-hover-tooltip';
+    tooltip.innerHTML = '<span class="tooltip-sparkle">✦</span><span>마우스를 올리면 메뉴가 펼쳐집니다</span>';
+    tabContainer.appendChild(tooltip);
+  }
+
+  // 2. 최초 진입 시 슬며시 펼쳐졌다가 닫히는 티저 데모 연출 (조작법 자연스러운 각인)
+  const hasSeenTeaser = sessionStorage.getItem('tab_teaser_peek');
+  if (!hasSeenTeaser) {
+    setTimeout(() => {
+      tabContainer.classList.add('peek-expansion');
+      setTimeout(() => {
+        tabContainer.classList.remove('peek-expansion');
+        sessionStorage.setItem('tab_teaser_peek', 'true');
+      }, 1200);
+    }, 650);
+  }
+
+  // 3. 툴팁 해제 처리
+  function dismissTooltip() {
+    if (tooltip && !tooltip.classList.contains('dismissed')) {
+      tooltip.classList.add('dismissed');
+      sessionStorage.setItem('tab_hint_dismissed', 'true');
+    }
+  }
+
+  if (sessionStorage.getItem('tab_hint_dismissed')) {
+    tooltip.classList.add('dismissed');
+  }
+
   tabContainer.addEventListener('mouseenter', () => {
     document.body.classList.add('nav-hovered');
+    dismissTooltip();
   });
 
   tabContainer.addEventListener('mouseleave', () => {
     document.body.classList.remove('nav-hovered');
   });
+
+  // 터치 디바이스 지원
+  tabContainer.addEventListener('touchstart', (e) => {
+    dismissTooltip();
+    if (!e.target.closest('.tab-link')) {
+      tabContainer.classList.toggle('is-expanded');
+    }
+  }, { passive: true });
 }
 
 function initSmoothTransitions() {
@@ -190,6 +232,11 @@ function updateNavActiveState(href) {
       link.classList.remove('active');
     }
   });
+
+  const tabContainer = document.querySelector('.tab-container');
+  if (tabContainer) {
+    tabContainer.classList.remove('is-expanded');
+  }
 }
 
 // 스페이스 갤러리 사진 팝업 모달
