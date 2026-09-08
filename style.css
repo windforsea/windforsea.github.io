@@ -742,23 +742,6 @@ body.subpage .tab-container:hover .tab-link {
   transform: scale(1.06);
 }
 
-.photo-badge {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  padding: 3px 8px;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  font-weight: 500;
-  border-radius: var(--radius-pill);
-  background: rgba(15, 23, 42, 0.72);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: var(--accent-blue);
-  letter-spacing: 0.02em;
-}
-
 .photo-info {
   padding: 12px 14px;
 }
