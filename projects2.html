@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects (Part 2) | windforsea</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="subpage">
+
+  <!-- 블루 사파이어 & 스카이 블루 리퀴드 글래스 앰비언트 배경 -->
+  <div class="background-container" aria-hidden="true">
+    <div class="sapphire-orb sapphire-orb-1"></div>
+    <div class="sapphire-orb sapphire-orb-2"></div>
+    <div class="sapphire-orb sapphire-orb-3"></div>
+    <div class="background-overlay"></div>
+  </div>
+
+  <!-- 최상단 내비게이션 바 (중앙 3개 탭 & 우측 책자 전환 링크) -->
+  <header class="top-nav-bar">
+    <!-- 중앙 상단 3개 탭 (프로젝트 2 활성화) -->
+    <nav class="tab-container" role="navigation" aria-label="메인 메뉴">
+      <a href="about.html" class="tab-link">자기소개</a>
+      <a href="projects.html" class="tab-link">프로젝트</a>
+      <a href="projects2.html" class="tab-link active">프로젝트 2</a>
+    </nav>
+
+    <!-- 우측 다른 에디션 전환 링크 -->
+    <div class="top-nav-switches">
+      <a href="index.html" class="version-switch-link" title="책자보기">
+        <span>📖</span>
+        <span class="btn-text">책자보기</span>
+      </a>
+      <a href="galaxy.html" class="version-switch-link btn-nebula" title="네뷸라 오션 스펙터클 에디션 보기">
+        <span>🌌</span>
+        <span class="btn-text">스펙터클</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- 메인 프로젝트 2 글래스 카드 -->
+  <main class="page-container">
+    <section class="glass-card">
+      <div class="card-header">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; color: var(--accent-blue); letter-spacing: 0.1em; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.28); padding: 3px 12px; border-radius: 9999px;">ARCHIVE • PART 2</span>
+          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted);">Page 2 of Projects (6 slots)</span>
+        </div>
+        <h1>Projects & Engineering Works (Part 2)</h1>
+        <p>프로젝트 확장에 맞춰 순차적으로 기록되는 공간입니다. 6개 단위로 다음 페이지에 체계적으로 적재됩니다.</p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- 슬롯 1: 준비 중인 프로젝트 (Upcoming Project #7) -->
+        <article class="project-card" style="border: 1px dashed rgba(56, 189, 248, 0.35); background: rgba(15, 23, 42, 0.42);">
+          <div class="project-visual" style="opacity: 0.85;">🚀</div>
+          <div class="project-body">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px;">
+              <h3 style="margin-bottom: 0;">신규 데이터 파이프라인 & AI 에이전트</h3>
+              <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-blue); background: rgba(56, 189, 248, 0.14); border: 1px solid rgba(56, 189, 248, 0.3); padding: 2px 8px; border-radius: 9999px;">In Progress</span>
+            </div>
+            <p>공공데이터 API 자동 수집 및 로컬 LLM 오케스트레이션을 결합한 차기 실무 자동화 파이프라인을 기획 및 구현 중입니다. 배포 완료 시 레포지토리와 대시보드가 공개됩니다.</p>
+            <div class="project-tags">
+              <span class="project-tag">Python 3.12</span>
+              <span class="project-tag">LLM Orchestration</span>
+              <span class="project-tag">Data Pipeline</span>
+              <span class="project-tag">Next Gen</span>
+            </div>
+            <div style="margin-top: 14px;">
+              <span style="display: inline-block; font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-blue); background: rgba(56, 189, 248, 0.08); border: 1px dashed rgba(56, 189, 248, 0.3); padding: 5px 12px; border-radius: var(--radius-pill);">진행 중 • 추후 업데이트</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 슬롯 2: 차기 엔지니어링 실습 (Upcoming Project #8) -->
+        <article class="project-card" style="border: 1px dashed rgba(255, 255, 255, 0.18); background: rgba(15, 23, 42, 0.28);">
+          <div class="project-visual" style="opacity: 0.65;">🧪</div>
+          <div class="project-body">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px;">
+              <h3 style="color: var(--text-secondary); margin-bottom: 0;">Engineering Lab & Auto Test</h3>
+              <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); padding: 2px 8px; border-radius: 9999px;">Planned</span>
+            </div>
+            <p>제조 현장의 공정 품질 관리(QA) 철학을 소프트웨어 테스트 자동화 파이프라인에 접목한 실험적 엔지니어링 실습 공간입니다.</p>
+            <div class="project-tags">
+              <span class="project-tag">CI/CD Automation</span>
+              <span class="project-tag">Pytest</span>
+              <span class="project-tag">System QA</span>
+            </div>
+            <div style="margin-top: 14px;">
+              <span style="display: inline-block; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); background: rgba(255, 255, 255, 0.05); border: 1px dashed rgba(255, 255, 255, 0.15); padding: 5px 12px; border-radius: var(--radius-pill);">기획 단계 (Planned)</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 슬롯 3: 새로운 프로젝트 등록 공간 (Slot #9) -->
+        <article class="project-card" style="border: 1px dashed rgba(255, 255, 255, 0.14); background: rgba(15, 23, 42, 0.2);">
+          <div class="project-visual" style="opacity: 0.5;">🌱</div>
+          <div class="project-body">
+            <h3 style="color: var(--text-muted); margin-bottom: 6px;">Empty Slot #9</h3>
+            <p style="color: var(--text-muted);">새로운 개발 프로젝트 및 분석 모델이 추가될 준비된 빈 슬롯입니다. 6개 단위로 확장됩니다.</p>
+            <div class="project-tags">
+              <span class="project-tag" style="opacity: 0.5;">Open Slot</span>
+            </div>
+            <div style="margin-top: 14px;">
+              <span style="display: inline-block; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); padding: 5px 12px;">등록 대기 중</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- 6개 단위 페이지네이션 바 -->
+      <nav class="projects-pagination" aria-label="프로젝트 페이지 내비게이션">
+        <a href="projects.html" class="pagination-btn">
+          <span>←</span>
+          <span>이전 프로젝트 (1페이지)</span>
+        </a>
+        <div class="pagination-pages">
+          <a href="projects.html" class="pagination-pill" title="1페이지 (1~6번 프로젝트)">1</a>
+          <span class="pagination-pill active" title="현재 페이지: 2페이지 (7~12번 프로젝트)">2</span>
+        </div>
+      </nav>
+    </section>
+  </main>
+
+  <!-- 우측 하단 미니멀 워터마크 -->
+  <div class="watermark">
+    <span class="watermark-credit">@windforsea</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

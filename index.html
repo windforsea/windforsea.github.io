@@ -37,7 +37,7 @@
   <!-- 책자(Booklet) 메인 래퍼 -->
   <div class="book-wrapper">
     
-    <!-- 상단 3개 책갈피 탭 (가로 배치 & 위로 쏙 뽑아올림 인터랙션) -->
+    <!-- 상단 2개 책갈피 탭 (가로 배치 & 위로 쏙 뽑아올림 인터랙션) -->
     <nav class="bookmarks-nav" aria-label="책갈피 내비게이션">
       <div class="bookmarks-stack" id="bookmarksStack">
         <!-- 책갈피 1: 자기소개 (Page 1) -->
@@ -45,14 +45,9 @@
           <span class="ribbon-text">자기소개</span>
         </button>
 
-        <!-- 책갈피 2: 프로젝트 (Page 2 - 2개 페이지로 구성) -->
+        <!-- 책갈피 2: 프로젝트 (Page 2 - 3개 페이지로 구성) -->
         <button type="button" class="bookmark-ribbon ribbon-projects" data-page="2" title="프로젝트 챕터로 이동">
           <span class="ribbon-text">프로젝트</span>
-        </button>
-
-        <!-- 책갈피 3: 스페이스 (Page 4) -->
-        <button type="button" class="bookmark-ribbon ribbon-space" data-page="4" title="스페이스 챕터로 이동">
-          <span class="ribbon-text">스페이스</span>
         </button>
       </div>
     </nav>
@@ -148,7 +143,10 @@
               </div>
             </div>
 
-            <div class="page-number-footer">01 • About</div>
+            <div class="page-number-footer">
+              <span class="footer-book-title">PORTFOLIO JOURNAL • WINDFORSEA</span>
+              <span class="footer-page-indicator">PAGE 01 / 04 • ABOUT</span>
+            </div>
           </div>
         </article>
 
@@ -158,7 +156,10 @@
             <header class="chapter-header">
               <div class="chapter-meta-line">
                 <span class="chapter-num">CHAPTER 02 • PART 1</span>
-                <span class="chapter-paging-hint">다음 프로젝트는 화살표(❯)로 넘겨보세요</span>
+                <div class="chapter-page-badge">
+                  <span class="badge-num">1 / 3</span>
+                  <span class="badge-hint">다음 프로젝트는 우측(❯)으로 넘기세요</span>
+                </div>
               </div>
               <h2 class="chapter-title">Featured Projects</h2>
             </header>
@@ -204,7 +205,10 @@
               </div>
             </div>
 
-            <div class="page-number-footer">02 • Projects (1/2)</div>
+            <div class="page-number-footer">
+              <span class="footer-book-title">PORTFOLIO JOURNAL • WINDFORSEA</span>
+              <span class="footer-page-indicator">PAGE 02 / 04 • PROJECTS 1/3</span>
+            </div>
           </div>
         </article>
 
@@ -214,7 +218,10 @@
             <header class="chapter-header">
               <div class="chapter-meta-line">
                 <span class="chapter-num">CHAPTER 02 • PART 2</span>
-                <span class="chapter-paging-hint">❮ 이전 프로젝트 / 스페이스 ❯</span>
+                <div class="chapter-page-badge">
+                  <span class="badge-num">2 / 3</span>
+                  <span class="badge-hint">❮ 이전 / 다음 프로젝트 ❯</span>
+                </div>
               </div>
               <h2 class="chapter-title">Ongoing & Lab Works</h2>
             </header>
@@ -259,80 +266,72 @@
               </div>
             </div>
 
-            <div class="page-number-footer">02 • Projects (2/2)</div>
+            <div class="page-number-footer">
+              <span class="footer-book-title">PORTFOLIO JOURNAL • WINDFORSEA</span>
+              <span class="footer-page-indicator">PAGE 03 / 04 • PROJECTS 2/3</span>
+            </div>
           </div>
         </article>
 
-        <!-- ================= PAGE 4: 스페이스 (Chapter 3) ================= -->
-        <article class="book-page page-space" data-index="4">
+        <!-- ================= PAGE 4: 프로젝트 3페이지 (Chapter 2 Part 3) ================= -->
+        <article class="book-page page-projects page-projects-3" data-index="4">
           <div class="page-inner">
             <header class="chapter-header">
-              <span class="chapter-num">CHAPTER 03</span>
-              <h2 class="chapter-title">Space & Archives</h2>
+              <div class="chapter-meta-line">
+                <span class="chapter-num">CHAPTER 02 • PART 3</span>
+                <div class="chapter-page-badge">
+                  <span class="badge-num">3 / 3</span>
+                  <span class="badge-hint">❮ 이전 프로젝트</span>
+                </div>
+              </div>
+              <h2 class="chapter-title">Interactive & Team Works</h2>
             </header>
 
-            <!-- 원본 유지 문구 -->
-            <div class="space-book-desc-box">
-              <div class="space-plant-icon">🌱</div>
-              <h3 class="space-lead-title">비어있는 공간</h3>
-              <p class="space-lead-desc">
-                새로운 아이디어와 기록을 위해 남겨둔 여백입니다.<br />
-                블로그 글, 사진 모음, 또는 뭔가 새로운 시도가 될지도?.
-              </p>
-            </div>
-
-            <!-- 배경 사진 아카이브 갤러리 -->
-            <div class="book-gallery-section">
-              <h4 class="book-gallery-heading">📷 Photo Archives (Click to view)</h4>
-              
-              <div class="book-gallery-grid">
-                <!-- 1: 대왕암 -->
-                <div class="b-photo-card" data-src="assets/sledo.jpg" data-title="울산광역시 대왕암" data-desc="울산광역시 동구 일산동 • 기암괴석과 푸른 동해 바다">
-                  <div class="b-thumb-wrap">
-                    <img src="assets/sledo.jpg" alt="울산 대왕암" class="b-thumb" loading="lazy" />
+            <div class="projects-book-list">
+              <!-- 프로젝트 5: AI 협업 인터랙티브 웹 쇼케이스 (3대 에디션) -->
+              <div class="book-project-card">
+                <div class="bp-icon">🌐</div>
+                <div class="bp-content">
+                  <div class="bp-header">
+                    <h4>AI 협업 인터랙티브 웹 쇼케이스 (3대 에디션)</h4>
+                    <div class="bp-tags">
+                      <span class="bp-tag">Canvas 2D</span>
+                      <span class="bp-tag">JavaScript</span>
+                      <span class="bp-tag">GitHub Pages</span>
+                      <span class="bp-tag">AI 협업</span>
+                    </div>
                   </div>
-                  <div class="b-photo-info">
-                    <span class="b-photo-name">울산 대왕암</span>
-                    <span class="b-photo-sub">Daewangam</span>
+                  <p>외장 라이브러리(0MB) 없이 순수 코드로 구현한 실시간 캔버스 입자 시뮬레이션 및 3D 저널 쇼케이스입니다. AI와의 페어 프로그래밍으로 기획부터 Git 배포까지 완결했습니다.</p>
+                  <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px;">
+                    <a href="galaxy.html" class="bp-link">스펙터클 에디션 체험 →</a>
+                    <a href="projects.html" class="bp-link">간략보기 에디션 →</a>
                   </div>
                 </div>
+              </div>
 
-                <!-- 2: 선암호수공원 봄 -->
-                <div class="b-photo-card" data-src="assets/sunam1.jpg" data-title="선암호수공원 (봄)" data-desc="울산광역시 남구 선암동 • 호수 산책로와 숲의 정취">
-                  <div class="b-thumb-wrap">
-                    <img src="assets/sunam1.jpg" alt="선암호수공원 봄" class="b-thumb" loading="lazy" />
+              <!-- 프로젝트 6: Modern Python(uv) 웹 스크래핑 & 팀 협업 실습 -->
+              <div class="book-project-card">
+                <div class="bp-icon">⚡</div>
+                <div class="bp-content">
+                  <div class="bp-header">
+                    <h4>Modern Python(uv) 웹 스크래핑 & 팀 협업 실습</h4>
+                    <div class="bp-tags">
+                      <span class="bp-tag">Python 3.12</span>
+                      <span class="bp-tag">uv</span>
+                      <span class="bp-tag">BeautifulSoup4</span>
+                      <span class="bp-tag">Git 협업</span>
+                    </div>
                   </div>
-                  <div class="b-photo-info">
-                    <span class="b-photo-name">선암호수공원 (봄)</span>
-                    <span class="b-photo-sub">Seonam Lake</span>
-                  </div>
-                </div>
-
-                <!-- 3: 선암호수공원 산책로 -->
-                <div class="b-photo-card" data-src="assets/sunam2.jpg" data-title="선암호수공원 (산책로)" data-desc="울산광역시 남구 선암동 • 잔잔한 호수 수변 데크길">
-                  <div class="b-thumb-wrap">
-                    <img src="assets/sunam2.jpg" alt="선암호수공원 산책로" class="b-thumb" loading="lazy" />
-                  </div>
-                  <div class="b-photo-info">
-                    <span class="b-photo-name">선암호수공원 (산책로)</span>
-                    <span class="b-photo-sub">Promenade</span>
-                  </div>
-                </div>
-
-                <!-- 4: 슬도 -->
-                <div class="b-photo-card" data-src="assets/sledo2.jpg" data-title="울산광역시 슬도" data-desc="울산광역시 동구 방어동 • 슬도 등대와 시원한 파도 소리">
-                  <div class="b-thumb-wrap">
-                    <img src="assets/sledo2.jpg" alt="울산 슬도" class="b-thumb" loading="lazy" />
-                  </div>
-                  <div class="b-photo-info">
-                    <span class="b-photo-name">울산 슬도</span>
-                    <span class="b-photo-sub">Seuldo</span>
-                  </div>
+                  <p>초고속 패키지 관리자 uv 가상환경에서 BeautifulSoup4 기반 웹 데이터 수집을 구현하고, 동료 개발자와 Git 브랜칭 및 역할 분담을 통해 기획부터 데이터 적재까지 프로젝트 완성 전 과정을 단계별로 경험한 기초 협업 실습입니다.</p>
+                  <a href="https://github.com/windforsea/wepscraping-git" target="_blank" rel="noopener noreferrer" class="bp-link">GitHub 레포지토리 →</a>
                 </div>
               </div>
             </div>
 
-            <div class="page-number-footer">03 • Space</div>
+            <div class="page-number-footer">
+              <span class="footer-book-title">PORTFOLIO JOURNAL • WINDFORSEA</span>
+              <span class="footer-page-indicator">PAGE 04 / 04 • PROJECTS 3/3</span>
+            </div>
           </div>
         </article>
 
@@ -347,26 +346,11 @@
 
   <!-- 하단 페이지 도트 인디케이터 (총 5개 페이지) -->
   <div class="book-dots" id="bookDots">
-    <button type="button" class="dot active" data-index="0" aria-label="표지"></button>
-    <button type="button" class="dot" data-index="1" aria-label="자기소개"></button>
-    <button type="button" class="dot" data-index="2" aria-label="프로젝트 1"></button>
-    <button type="button" class="dot" data-index="3" aria-label="프로젝트 2"></button>
-    <button type="button" class="dot" data-index="4" aria-label="스페이스"></button>
-  </div>
-
-  <!-- 컴팩트 사진 모달 팝업 (너무 크게 확대되지 않음) -->
-  <div class="photo-modal" id="photoModal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="photo-modal-backdrop"></div>
-    <div class="photo-modal-content">
-      <button type="button" class="modal-close-btn" aria-label="닫기">✕</button>
-      <div class="modal-img-container">
-        <img src="" alt="" class="modal-img" id="modalImg" />
-      </div>
-      <div class="modal-caption">
-        <h4 id="modalTitle"></h4>
-        <p id="modalDesc"></p>
-      </div>
-    </div>
+    <button type="button" class="dot active" data-index="0" aria-label="표지" title="표지"></button>
+    <button type="button" class="dot" data-index="1" aria-label="자기소개" title="자기소개 (Chapter 1)"></button>
+    <button type="button" class="dot" data-index="2" aria-label="프로젝트 1/3" title="프로젝트 1/3 (Chapter 2 Part 1)"></button>
+    <button type="button" class="dot" data-index="3" aria-label="프로젝트 2/3" title="프로젝트 2/3 (Chapter 2 Part 2)"></button>
+    <button type="button" class="dot" data-index="4" aria-label="프로젝트 3/3" title="프로젝트 3/3 (Chapter 2 Part 3)"></button>
   </div>
 
   <script src="book.js"></script>

@@ -131,14 +131,26 @@ html, body {
 .page-counter-pill {
   pointer-events: auto;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  padding: 6px 14px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1.5px solid rgba(56, 189, 248, 0.45);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), 0 0 16px rgba(56, 189, 248, 0.25);
+  padding: 8px 18px;
   border-radius: 9999px;
   letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-smooth);
+}
+
+.page-counter-pill:hover {
+  border-color: rgba(56, 189, 248, 0.75);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45), 0 0 24px rgba(56, 189, 248, 0.45);
 }
 
 /* ==========================================================================
@@ -174,7 +186,7 @@ html, body {
 
 .bookmarks-stack {
   position: relative;
-  width: 280px;
+  width: 220px;
   height: 54px;
   display: flex;
   align-items: flex-end;
@@ -227,21 +239,19 @@ html, body {
   background: var(--ribbon-space-bg);
 }
 
-/* --- [1] 기본 상태: 책갈피 우측 끝이 바로 다음 책갈피 첫 글자 바로 앞에 오도록 정밀 겹침 --- */
+/* --- [1] 기본 상태: 2개 책갈피를 상단 중앙에서 자연스럽게 균형 배치 --- */
 .bookmark-ribbon.ribbon-about {
   left: 50%;
-  transform: translateX(calc(-50% - 74px)) translateY(0);
+  transform: translateX(calc(-50% - 46px)) translateY(0);
   z-index: 3;
 }
 .bookmark-ribbon.ribbon-projects {
   left: 50%;
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(calc(-50% + 46px)) translateY(0);
   z-index: 2;
 }
 .bookmark-ribbon.ribbon-space {
-  left: 50%;
-  transform: translateX(calc(-50% + 74px)) translateY(0);
-  z-index: 1;
+  display: none;
 }
 
 /* 활성화된 챕터는 평상시에도 위로 살짝 뽑혀서 표시 */
@@ -249,15 +259,11 @@ html, body {
   filter: drop-shadow(0 4px 14px rgba(255, 255, 255, 0.35));
 }
 .bookmark-ribbon.ribbon-about.active {
-  transform: translateX(calc(-50% - 74px)) translateY(-6px);
+  transform: translateX(calc(-50% - 46px)) translateY(-7px);
   z-index: 5;
 }
 .bookmark-ribbon.ribbon-projects.active {
-  transform: translateX(-50%) translateY(-6px);
-  z-index: 5;
-}
-.bookmark-ribbon.ribbon-space.active {
-  transform: translateX(calc(-50% + 74px)) translateY(-6px);
+  transform: translateX(calc(-50% + 46px)) translateY(-7px);
   z-index: 5;
 }
 .bookmark-ribbon.active .ribbon-text {
@@ -265,20 +271,17 @@ html, body {
   border-top-color: rgba(255, 255, 255, 0.95);
 }
 
-/* --- [2] 마우스 호버 시: 좌우 이동 없이 위로만 쏙 뽑아올림 (아래쪽은 책 속에 채워짐) --- */
+/* --- [2] 마우스 호버 시: 좌우 이동 없이 위로만 쏙 뽑아올림 --- */
 .bookmark-ribbon:hover {
   filter: brightness(1.16) drop-shadow(0 -4px 12px rgba(0, 0, 0, 0.5));
   z-index: 10 !important;
 }
 
 .bookmark-ribbon.ribbon-about:hover {
-  transform: translateX(calc(-50% - 74px)) translateY(-14px);
+  transform: translateX(calc(-50% - 46px)) translateY(-15px);
 }
 .bookmark-ribbon.ribbon-projects:hover {
-  transform: translateX(-50%) translateY(-14px);
-}
-.bookmark-ribbon.ribbon-space:hover {
-  transform: translateX(calc(-50% + 74px)) translateY(-14px);
+  transform: translateX(calc(-50% + 46px)) translateY(-15px);
 }
 
 /* ==========================================================================
@@ -400,6 +403,12 @@ html, body {
   filter: saturate(1.1) contrast(1.05) brightness(0.92);
 }
 
+.page-projects-3::before {
+  background-image: url('assets/sledo2.jpg');
+  opacity: 0.52;
+  filter: saturate(1.12) contrast(1.05) brightness(0.94);
+}
+
 .page-space::before {
   background-image: url('assets/sledo2.jpg');
   opacity: 0.55;
@@ -466,15 +475,51 @@ html, body {
   color: var(--accent-blue);
 }
 
+/* 강조된 챕터 내 페이징 배지 (Chapter Page Badge) */
+.chapter-page-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  padding: 3px 12px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), 0 0 12px rgba(56, 189, 248, 0.15);
+}
+
+.chapter-page-badge .badge-num {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #0b1329;
+  background: var(--accent-blue);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  letter-spacing: 0.05em;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+}
+
+.chapter-page-badge .badge-hint {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: #f1f5f9;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
 .chapter-paging-hint {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--accent-blue);
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.28);
-  padding: 2px 10px;
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: #e0f2fe;
+  background: rgba(56, 189, 248, 0.18);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  padding: 3px 12px;
   border-radius: 9999px;
   letter-spacing: 0.02em;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
 }
 
 .chapter-title {
@@ -486,14 +531,36 @@ html, body {
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
+/* 강조된 책장 하단 페이징 푸터 */
 .page-number-footer {
   margin-top: auto;
-  padding-top: 18px;
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  text-align: right;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.55);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  letter-spacing: 0.04em;
+}
+
+.footer-book-title {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer-page-indicator {
+  color: var(--accent-blue);
+  font-weight: 700;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 3px 12px;
+  border-radius: 9999px;
+  letter-spacing: 0.06em;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
 }
 
 /* ==========================================================================
@@ -962,34 +1029,36 @@ html, body {
 }
 
 /* ==========================================================================
-   Navigation Arrow Buttons (좌/우 넘김)
+   Navigation Arrow Buttons (좌/우 넘김) - 강조된 시인성
    ========================================================================== */
 .nav-arrow-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1.5px solid rgba(56, 189, 248, 0.4);
   color: #ffffff;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 50;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(56, 189, 248, 0.2);
   transition: var(--transition-smooth);
 }
 
 .nav-arrow-btn:hover {
-  background: rgba(15, 23, 42, 0.95);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-50%) scale(1.08);
+  background: rgba(15, 23, 42, 0.98);
+  border-color: rgba(56, 189, 248, 0.85);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55), 0 0 24px rgba(56, 189, 248, 0.5);
+  color: var(--accent-blue);
 }
 
 .nav-arrow-btn:active {
@@ -997,21 +1066,23 @@ html, body {
 }
 
 .btn-prev {
-  left: -24px;
+  left: -26px;
 }
 
 .btn-next {
-  right: -24px;
+  right: -26px;
 }
 
 .nav-arrow-btn:disabled {
-  opacity: 0.25;
+  opacity: 0.2;
   cursor: not-allowed;
   transform: translateY(-50%) scale(1);
+  box-shadow: none;
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* ==========================================================================
-   Bottom Dots Indicator
+   Bottom Dots Indicator - 강조된 페이지네이션 인디케이터
    ========================================================================== */
 .book-dots {
   position: fixed;
@@ -1020,31 +1091,38 @@ html, body {
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
+  gap: 10px;
+  padding: 8px 18px;
   border-radius: 9999px;
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   z-index: 50;
 }
 
 .book-dots .dot {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.35);
   border: none;
   cursor: pointer;
   padding: 0;
   transition: var(--transition-smooth);
 }
 
+.book-dots .dot:hover {
+  background: rgba(255, 255, 255, 0.75);
+  transform: scale(1.2);
+}
+
 .book-dots .dot.active {
-  width: 22px;
+  width: 26px;
   border-radius: 9999px;
   background: var(--accent-blue);
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.85);
 }
 
 /* ==========================================================================

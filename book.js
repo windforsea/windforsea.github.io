@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const pageNames = [
     'Cover • 표지',
     'Chapter 01 • 자기소개',
-    'Chapter 02 • 프로젝트 (1/2)',
-    'Chapter 02 • 프로젝트 (2/2)',
-    'Chapter 03 • 스페이스'
+    'Chapter 02 • 프로젝트 (1/3)',
+    'Chapter 02 • 프로젝트 (2/3)',
+    'Chapter 02 • 프로젝트 (3/3)'
   ];
 
   function goToPage(targetIndex) {
@@ -38,15 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // 2. 상단 3개 책갈피 리본 활성화 갱신 (프로젝트는 1, 2페이지 모두 활성화 유지)
+    // 2. 상단 2개 책갈피 리본 활성화 갱신 (프로젝트는 2, 3, 4페이지 모두 활성화 유지)
     bookmarks.forEach((bm) => {
       const pageNum = parseInt(bm.dataset.page, 10);
       let isActive = false;
       if (pageNum === 1 && currentPage === 1) {
         isActive = true;
-      } else if (pageNum === 2 && (currentPage === 2 || currentPage === 3)) {
-        isActive = true;
-      } else if (pageNum === 4 && currentPage === 4) {
+      } else if (pageNum === 2 && (currentPage >= 2 && currentPage <= 4)) {
         isActive = true;
       }
 
