@@ -421,7 +421,8 @@ html, body {
   filter: saturate(1.1) contrast(1.05) brightness(0.92);
 }
 
-.page-projects-3::before {
+.page-projects-3::before,
+.page-projects-4::before {
   background-image: url('assets/sledo2.jpg');
   opacity: 0.52;
   filter: saturate(1.12) contrast(1.05) brightness(0.94);

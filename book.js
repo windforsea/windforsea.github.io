@@ -19,9 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const pageNames = [
     'Cover • 표지',
     'Chapter 01 • 자기소개',
-    'Chapter 02 • 프로젝트 (1/3)',
-    'Chapter 02 • 프로젝트 (2/3)',
-    'Chapter 02 • 프로젝트 (3/3)',
+    'Chapter 02 • 프로젝트 (1/4)',
+    'Chapter 02 • 프로젝트 (2/4)',
+    'Chapter 02 • 프로젝트 (3/4)',
+    'Chapter 02 • 프로젝트 (4/4)',
     'Chapter 03 • 방명록'
   ];
 
@@ -45,9 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
       let isActive = false;
       if (pageNum === 1 && currentPage === 1) {
         isActive = true;
-      } else if (pageNum === 2 && (currentPage >= 2 && currentPage <= 4)) {
+      } else if (pageNum === 2 && (currentPage >= 2 && currentPage <= 5)) {
         isActive = true;
-      } else if (pageNum === 5 && currentPage === 5) {
+      } else if (pageNum === 6 && currentPage === 6) {
         isActive = true;
       }
 
