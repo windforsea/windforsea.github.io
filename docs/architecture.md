@@ -70,9 +70,13 @@ flowchart TD
 | 파일명 | 용도 및 핵심 역할 |
 | :--- | :--- |
 | `index.html` / `book.html` | 메인 엔트리: 3D 책자 저널 (Cover, About, Projects 1~4, Guestbook) |
-| `book.css` | 양장본 질감, 3D 책장 회전, 책갈피 리본, 네온/다크 테마 스타일시트 |
-| `book.js` | 책장 넘김 상태 머신, 제스처 리스너, 책갈피 탭 제어 스크립트 |
-| `supabase-config.js` | Supabase 클라이언트 초기화 및 실시간 데이터 I/O 모듈 |
-| `about.html`, `projects.html` | 간략보기 에디션 (글래스모피즘 카드 기반의 빠른 열람용) |
-| `galaxy.html`, `galaxy.js` | Nebula Ocean 3D 물리 시뮬레이션 쇼케이스 서브페이지 |
+| `about.html`, `projects.html`, `space.html` | 간략보기 에디션 (글래스모피즘 카드 기반의 빠른 열람용) |
+| `galaxy.html` | Nebula Ocean 3D 물리 시뮬레이션 쇼케이스 서브페이지 |
 | `ulsan_report.html`, `ulsan_parking_map.html` | 울산 공공데이터 분석 보고서 및 Folium 시각화 독립 페이지 |
+| `css/book.css` | 양장본 질감, 3D 책장 회전, 책갈피 리본, 네온/다크 테마 스타일시트 |
+| `css/style.css` | 간략보기 에디션용 글래스모피즘 & 반응형 레이아웃 CSS |
+| `css/galaxy.css` | Nebula Ocean 3D 쇼케이스 전용 스타일시트 |
+| `js/book.js` | 책장 넘김 상태 머신, 제스처 리스너, 책갈피 탭 제어 스크립트 |
+| `js/script.js` | 간략보기 에디션 인터랙션 스크립트 |
+| `js/galaxy.js` | 60fps 파티클 물리 시뮬레이션 렌더링 엔진 |
+| `js/supabase-config.js` | Supabase 클라이언트 초기화 및 실시간 방명록 API 모듈 |

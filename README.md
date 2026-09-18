@@ -36,20 +36,25 @@
 windforsea.github.io/
 ├── 📄 index.html              # 포트폴리오 메인 엔트리: 3D 책자 저널 (Cover, About, Projects 1~4, Guestbook)
 ├── 📄 book.html               # 3D 책자 저널 전용 페이지 (index.html과 미러링)
-├── 📄 book.css                # 3D 원근 투영, 페이지 넘김 애니메이션, 책갈피 리본 스타일시트
-├── 📄 book.js                 # 책장 넘김 상태 제어, 모바일 터치 스와이프, 키보드 이벤트 리스너
-├── 📄 supabase-config.js      # Supabase JavaScript SDK 연동 및 실시간 방명록 API
-│
 ├── 📄 about.html              # 간략보기(Clean View): 프로필 & 현장 도메인 이력
 ├── 📄 projects.html           # 간략보기(Clean View): 7대 프로젝트 글래스 카드 그리드
-├── 📄 style.css               # 간략보기 에디션용 글래스모피즘 & 반응형 CSS
-├── 📄 script.js               # 간략보기 에디션 인터랙션 스크립트
-│
-├── 📄 galaxy.html / js / css  # Nebula Ocean 3D 물리 시뮬레이션 인터랙티브 쇼케이스
+├── 📄 space.html              # 서브페이지: 스페이스
+├── 📄 galaxy.html             # Nebula Ocean 3D 물리 시뮬레이션 인터랙티브 쇼케이스
 ├── 📄 ulsan_report.html       # 울산 거주자우선주차 공공데이터 종합 분석 보고서
 ├── 📄 ulsan_parking_map.html  # 울산 남구 공공데이터 Folium 지도 시각화
 │
-├── 📂 docs/                   # 프로젝트 세부 도메인별 명세 문서 (3개 파일)
+├── 📂 css/                    # 🎨 스타일시트 전용 디렉토리
+│   ├── 📄 book.css            # 3D 원근 투영, 페이지 넘김 애니메이션, 책갈피 리본 스타일
+│   ├── 📄 style.css           # 간략보기 에디션용 글래스모피즘 & 반응형 CSS
+│   └── 📄 galaxy.css          # Nebula Ocean 3D 인터랙티브 쇼케이스 전용 스타일
+│
+├── 📂 js/                     # ⚡ 클라이언트 자바스크립트 모듈 디렉토리
+│   ├── 📄 book.js             # 책장 넘김 상태 제어, 모바일 터치 스와이프, 키보드 이벤트 리스너
+│   ├── 📄 script.js           # 간략보기 에디션 인터랙션 스크립트
+│   ├── 📄 galaxy.js           # 60fps 파티클 물리 시뮬레이션 렌더링 엔진
+│   └── 📄 supabase-config.js  # Supabase JavaScript SDK 연동 및 실시간 방명록 API
+│
+├── 📂 docs/                   # 📑 프로젝트 세부 도메인별 명세 문서 (3개 파일)
 │   ├── 📄 profile.md          # 👤 엔지니어 아이덴티티, 5대 현장 도메인, 기술 스택
 │   ├── 📄 projects.md         # 🚀 7대 프로젝트 상세 스펙 및 Anti Survivors 게임 명세
 │   └── 📄 architecture.md     # ⚙️ 포트폴리오 웹 아키텍처 및 Supabase BaaS 구조

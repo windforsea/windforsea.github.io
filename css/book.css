@@ -397,40 +397,40 @@ html, body {
 
 /* 개별 페이지 맞춤 배경 이미지 (실제 풍경이 또렷하게 보이도록 세팅) */
 .page-cover::before {
-  background-image: url('assets/sledo.jpg');
+  background-image: url('../assets/sledo.jpg');
   opacity: 0.65;
   filter: saturate(1.15) contrast(1.08) brightness(0.92);
 }
 
 .page-about::before {
-  background-image: url('assets/sunam1.jpg');
+  background-image: url('../assets/sunam1.jpg');
   opacity: 0.54;
   filter: saturate(1.1) contrast(1.05) brightness(0.94);
 }
 
 .page-projects::before,
 .page-projects-1::before {
-  background-image: url('assets/sunam2.jpg');
+  background-image: url('../assets/sunam2.jpg');
   opacity: 0.52;
   filter: saturate(1.1) contrast(1.05) brightness(0.92);
 }
 
 .page-projects-2::before {
-  background-image: url('assets/wid.jpg');
+  background-image: url('../assets/wid.jpg');
   opacity: 0.46;
   filter: saturate(1.1) contrast(1.05) brightness(0.92);
 }
 
 .page-projects-3::before,
 .page-projects-4::before {
-  background-image: url('assets/sledo2.jpg');
+  background-image: url('../assets/sledo2.jpg');
   opacity: 0.52;
   filter: saturate(1.12) contrast(1.05) brightness(0.94);
 }
 
 .page-guestbook::before,
 .page-space::before {
-  background-image: url('assets/sledo2.jpg');
+  background-image: url('../assets/sledo2.jpg');
   opacity: 0.55;
   filter: saturate(1.12) contrast(1.05) brightness(0.95);
 }
